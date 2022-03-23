@@ -1,0 +1,67 @@
+﻿@page "/Account/Login"
+
+@using Lotus.Web;
+@using Lotus.Web.Account;
+
+@layout LoginLayout
+@inject NavigationManager navigationManager
+@inject CIdentityAuthenticationStateProvider authStateProvider
+
+<div class="container">
+    <EditForm class="form-signin" OnValidSubmit="OnSubmit" Model="LoginParameters">
+        <DataAnnotationsValidator />
+        <h4 class="font-weight-normal text-center m-2">Войти в систему</h4>
+
+        <label for="inputUsername" class="sr-only m-2">Имя пользователя</label>
+        <InputText id="inputUsername" class="form-control m-2" @bind-Value="LoginParameters.UserName" autofocus placeholder="Имя пользователя" />
+        <ValidationMessage For="@(() => LoginParameters.UserName)" />
+
+        <label for="inputPassword" class="sr-only m-2">Пароль</label>
+        <InputText type="password" id="inputPassword" class="form-control m-2" placeholder="Пароль" @bind-Value="LoginParameters.Password" />
+        <ValidationMessage For="@(() => LoginParameters.Password)" />
+
+        <div class="form-check m-2">
+            <InputCheckbox id="inputRememberMe" class="form-check-input" @bind-Value="@LoginParameters.RememberMe" />
+            <label class="form-check-label" for="inputRememberMe">Запомнить меня</label>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block m-2" type="submit">Войти</button>
+
+        <label class="text-danger">@ErrorMessage</label>
+
+        <NavLink href="/Account/Register">
+            <h6 class="font-weight-normal text-center">Зарегистрироваться</h6>
+        </NavLink>
+    </EditForm>
+</div>
+
+@code
+{
+    /// <summary>
+    /// Параметры для входа
+    /// </summary>
+    CLoginParameters LoginParameters { get; set; } = new CLoginParameters();
+
+    /// <summary>
+    /// Строка с ошибкой
+    /// </summary>
+    String ErrorMessage { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    async Task OnSubmit()
+    {
+        ErrorMessage = null;
+        try
+        {
+            await authStateProvider.Login(LoginParameters);
+            navigationManager.NavigateTo("");
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+    }
+}

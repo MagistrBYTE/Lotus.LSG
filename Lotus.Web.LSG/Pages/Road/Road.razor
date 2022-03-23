@@ -1,0 +1,28 @@
+﻿@page "/Road"
+@inherits LayoutComponentBase
+@layout MainLayout
+
+<nav class="navbar navbar-expand-lg navbar-light navbar_backcolor_secondary">
+
+	<a class="navbar-brand" href="/Road">Дорожная деятельность</a>
+
+	<ul class="navbar-nav mr-auto">
+		<li class="nav-item">
+			<NavLink href="/Road/Аllocation" class="nav-link">
+				Распределение ассигнований
+			</NavLink>
+		</li>
+		<li class="nav-item">
+			<NavLink href="/Road/Activities" class="nav-link">
+				Мероприятия по дорожной деятельности
+			</NavLink>
+		</li>
+		<li class="nav-item">
+			<NavLink href="/Road/Programm" class="nav-link">
+				Информация о программе
+			</NavLink>
+		</li>
+	</ul>
+</nav>
+
+@Body

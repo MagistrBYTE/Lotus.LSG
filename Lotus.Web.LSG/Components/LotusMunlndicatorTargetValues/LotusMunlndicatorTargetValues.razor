@@ -1,0 +1,32 @@
+﻿@namespace Lotus.Web.Components
+
+@inherits LotusMunlndicatorTargetValuesClass
+
+@using Lotus.Core;
+@using Lotus.Web;
+@using Lotus.Web.Components;
+@using Lotus.LSG;
+
+@if (Activities != null)
+{
+    <tr class="text-center" style="font-size:small; height:36px">
+        <td scope="col">1</td>
+        <td scope="col">@(Indicator.Desc)</td>
+        <td scope="col">@(Indicator.ValueUnit)</td>
+        @{
+            Double total_value = 0;
+            for (Int32 y = 2020; y <= 2026; y++)
+            {
+                total_value = Activities.GetPlannedValueForSubProgram(SubProgramId, Indicator.Id, y);
+                if (total_value > 0)
+                {
+                    <td scope="col">@(total_value.ToString())</td>
+                }
+                else
+                {
+                    <td scope="col"></td>
+                }
+            }
+        }
+    </tr>
+}

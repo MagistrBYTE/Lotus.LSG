@@ -1,0 +1,34 @@
+﻿@inherits LayoutComponentBase
+
+
+@using Pages.Account;
+@using Lotus.Web.LSG.Pages.Account
+
+<AuthorizeView>
+
+    <Authorizing>
+        <h1>Загрузка ...</h1>
+    </Authorizing>
+
+    <Authorized>
+        <NavMenu />
+
+        <AccountAuthorizedTool />
+
+        @Body
+    </Authorized>
+
+    <NotAuthorized>
+        <NavMenu />
+
+        <AccountNotAuthorizedTool />
+
+        @Body
+    </NotAuthorized>
+</AuthorizeView>
+
+@code
+{
+    [CascadingParameter]
+    Task<AuthenticationState> AuthenticationState { get; set; }
+}

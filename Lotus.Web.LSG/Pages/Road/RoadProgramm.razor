@@ -1,0 +1,524 @@
+﻿@page "/Road/Programm"
+
+@using Lotus.Web.Components;
+
+@layout Road
+
+@inject CRepositoryDatabase RepositoryDatabase;
+
+@if (Activities == null)
+{
+    <div style="position:relative; width:100%; text-align:center">
+        <h2>Информация о муниципальной программе</h2>
+        <p><i class="fas fa-spinner fa-spin"></i>  Идет загрузка данных...</p>
+    </div>
+}
+else
+{
+    <Tabs>
+        <Items>
+            <Tab Name="home">Объемы бюджетных ассигнований</Tab>
+            <Tab Name="profile">Результаты реализации</Tab>
+            <Tab Name="activities">Система мероприятий</Tab>
+            <Tab Name="indicators">Сведения о целевых показателях</Tab>
+        </Items>
+        <Content>
+        <TabPanel Name="home">
+            <pre>
+        Общая сумма бюджетных средств, необходимых для реализации программных мероприятий, составляет <b>@GetTotalPrice() тыс. руб.,</b> в том числе: 
+        местный бюджет: <b>@GetTotalPrice(TBudgetFinancing.Local) тыс. руб.</b>
+        областной бюджет: <b>@GetTotalPrice(TBudgetFinancing.Regional) тыс. руб.,</b> 
+        в том числе по годам реализации:
+            <b>2020 г, всего @GetTotalPrice(2020) тыс. руб.,</b> в том числе:
+        местный бюджет @GetTotalPrice(2020, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetTotalPrice(2020, TBudgetFinancing.Regional) тыс. руб.
+            <b>2021 г, всего @GetTotalPrice(2021) тыс. руб.,</b> в том числе:
+        местный бюджет @GetTotalPrice(2021, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetTotalPrice(2021, TBudgetFinancing.Regional) тыс. руб.
+            <b>2022 г, всего @GetTotalPrice(2022) тыс. руб.,</b> в том числе:
+        местный бюджет @GetTotalPrice(2022, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetTotalPrice(2022, TBudgetFinancing.Regional) тыс. руб.
+            <b>2023 г, всего @GetTotalPrice(2023) тыс. руб.,</b> в том числе:
+        местный бюджет @GetTotalPrice(2023, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetTotalPrice(2023, TBudgetFinancing.Regional) тыс. руб.
+            <b>2024 г, всего @GetTotalPrice(2024) тыс. руб.,</b> в том числе:
+        местный бюджет @GetTotalPrice(2024, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetTotalPrice(2024, TBudgetFinancing.Regional) тыс. руб.
+            <b>2025 г, всего @GetTotalPrice(2025) тыс. руб.,</b> в том числе:
+        местный бюджет @GetTotalPrice(2025, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetTotalPrice(2025, TBudgetFinancing.Regional) тыс. руб.
+        В том числе по подпрограммам:
+        По подпрограмме «Развитие и совершенствование сети автомобильных дорог общего пользования в Брединском муниципальном районе» объем бюджетных ассигнований на реализацию подпрограммы в 2020-2025 годах составляет 
+            <b>@GetRoadPrice() тыс. руб.,</b> в том числе: 
+        местный бюджет: <b>@GetRoadPrice(TBudgetFinancing.Local) тыс. руб.</b> 
+        областной бюджет: <b>@GetRoadPrice(TBudgetFinancing.Regional) тыс. руб.</b>;
+        в том числе по годам реализации:
+            <b>2020 г, всего @GetRoadPrice(2020) тыс. руб.,</b> в том числе:
+        местный бюджет @GetRoadPrice(2020, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetRoadPrice(2020, TBudgetFinancing.Regional) тыс. руб.
+            <b>2021 г, всего @GetRoadPrice(2021) тыс. руб.,</b> в том числе:
+        местный бюджет @GetRoadPrice(2021, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetRoadPrice(2021, TBudgetFinancing.Regional) тыс. руб.
+            <b>2022 г, всего @GetRoadPrice(2022) тыс. руб.,</b> в том числе:
+        местный бюджет @GetRoadPrice(2022, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetRoadPrice(2022, TBudgetFinancing.Regional) тыс. руб.
+            <b>2023 г, всего @GetRoadPrice(2023) тыс. руб.,</b> в том числе:
+        местный бюджет @GetRoadPrice(2023, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetRoadPrice(2023, TBudgetFinancing.Regional) тыс. руб.
+            <b>2024 г, всего @GetRoadPrice(2024) тыс. руб.,</b> в том числе:
+        местный бюджет @GetRoadPrice(2024, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetRoadPrice(2024, TBudgetFinancing.Regional) тыс. руб.
+            <b>2025 г, всего @GetRoadPrice(2025) тыс. руб.,</b> в том числе:
+        местный бюджет @GetRoadPrice(2025, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetRoadPrice(2025, TBudgetFinancing.Regional) тыс. руб.
+        По подпрограмме «Безопасность дорожного движения в Брединском муниципальном районе» объем бюджетных ассигнований на реализацию подпрограммы составляет <b>@GetSecurityPrice() тыс. руб.,</b> тыс. руб., в том числе 
+        местный бюджет: <b>@GetRoadPrice(TBudgetFinancing.Local) тыс. руб.</b> 
+        областной бюджет: <b>@GetRoadPrice(TBudgetFinancing.Regional) тыс. руб.</b>;
+        в том числе по годам реализации:
+            <b>2020 г, всего @GetSecurityPrice(2020) тыс. руб.,</b> в том числе:
+        местный бюджет @GetSecurityPrice(2020, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetSecurityPrice(2020, TBudgetFinancing.Regional) тыс. руб.
+            <b>2021 г, всего @GetSecurityPrice(2021) тыс. руб.,</b> в том числе:
+        местный бюджет @GetSecurityPrice(2021, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetSecurityPrice(2021, TBudgetFinancing.Regional) тыс. руб.
+            <b>2022 г, всего @GetSecurityPrice(2022) тыс. руб.,</b> в том числе:
+        местный бюджет @GetSecurityPrice(2022, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetSecurityPrice(2022, TBudgetFinancing.Regional) тыс. руб.
+            <b>2023 г, всего @GetSecurityPrice(2023) тыс. руб.,</b> в том числе:
+        местный бюджет @GetSecurityPrice(2023, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetSecurityPrice(2023, TBudgetFinancing.Regional) тыс. руб.
+            <b>2024 г, всего @GetSecurityPrice(2024) тыс. руб.,</b> в том числе:
+        местный бюджет @GetSecurityPrice(2024, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetSecurityPrice(2024, TBudgetFinancing.Regional) тыс. руб.
+            <b>2025 г, всего @GetSecurityPrice(2025) тыс. руб.,</b> в том числе:
+        местный бюджет @GetSecurityPrice(2025, TBudgetFinancing.Local) тыс. руб.
+        областной бюджет @GetSecurityPrice(2025, TBudgetFinancing.Regional) тыс. руб.
+        </pre>
+        </TabPanel>
+        <TabPanel Name="profile">
+            <pre>
+                В результате реализации муниципальной программы<br />
+                @{
+                    for (Int32 i = 0; i < Indicators.Count; i++)
+                    {
+                    <span>
+                    по целевому индикатору "@Indicators[i].Desc" показатель
+                    конечного результата вырастет на @GetTotalIndicator(Indicators[i])</span><br/>
+                    }
+                }
+            </pre>
+        </TabPanel>
+
+         <TabPanel Name="activities">
+            <table class=".table-sm table-bordered" width="100%">
+                <thead>
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <th rowspan="2" width="5%">N п/п</th>
+                        <th rowspan="2" width="22%">Наименование мероприятия</th>
+                        <th rowspan="2" width="15%">Ответственный исполнитель, соисполнители</th>
+                        <th rowspan="2" width="10%">Источник финансирования</th>
+                        <th scope="col" colspan="6">Объем финансирования по годам реализации муниципальной программы, тыс. рублей</th>
+                    </tr>
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <th scope="col" width="8%">2020</th>
+                        <th scope="col" width="8%">2021</th>
+                        <th scope="col" width="8%">2022</th>
+                        <th scope="col" width="8%">2023</th>
+                        <th scope="col" width="8%">2024</th>
+                        <th scope="col" width="8%">2025</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td scope="col" colspan="10">
+                            Цель № 1 «Развитие сети автомобильных дорог общего пользования, обеспечение качества,
+                            доступности и конкурентоспособности транспортных услуг для населения и хозяйствующих субъектов»
+                        </td>
+                    </tr>
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td scope="col" colspan="10">
+                            Муниципальная подпрограмма «Развитие и совершенствование сети автомобильных дорог общего пользования в Брединском муниципальном районе»
+                        </td>
+                    </tr>
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td scope="col" colspan="10">
+                            Задача № 1 Улучшение технического состояния и потребительских свойств автомобильных дорог и элементов дорожно-транспортной инфраструктуры
+                        </td>
+                    </tr>
+
+                    @*прирост протяженности*@
+                    <LotusViewActivity Activities="@Activities" IndicatorId="2" />
+
+                    @*ликвидация дефектов*@
+                    <LotusViewActivity Activities="@Activities" IndicatorId="3" />
+
+                    @*мосты*@
+                    <LotusViewActivity Activities="@Activities" IndicatorId="4" />
+
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td scope="col" colspan="10">
+                            Задача № 2 Создание условий для формирования единой дорожной сети, круглогодично доступной для населения, обеспечение устойчивого функционирования дорожной сети
+                        </td>
+                    </tr>
+
+                    @*Комплексное содержание*@
+                    <LotusViewActivity Activities="@Activities" IndicatorId="5" />
+
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td scope="col" colspan="10">
+                            Цель № 2 «Создание условий для обеспечения охраны жизни и здоровья граждан, их законных прав на безопасные условия движения на автомобильных дорогах»
+                        </td>
+                    </tr>
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td scope="col" colspan="10">
+                            Муниципальная подпрограмма «Безопасность дорожного движения в Брединском муниципальном районе»
+                        </td>
+                    </tr>
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td scope="col" colspan="10">
+                            Задача № 1 Создание безопасных и комфортных условий для движения транспортных средств и пешеходов
+                        </td>
+                    </tr>
+
+                    @*Пешеходные переходы*@
+                    <LotusViewActivity Activities="@Activities" IndicatorId="6" />
+
+                    @*Дорожные знаки*@
+                    <LotusViewActivity Activities="@Activities" IndicatorId="7" />
+
+                    @*Искусственная неровность*@
+                    <LotusViewActivity Activities="@Activities" IndicatorId="8" />
+
+
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td scope="col" colspan="10">
+                            Задача № 2 Обеспечение повышения уровня благоустройства общественных территорий административного центра Брединского района
+                        </td>
+                    </tr>
+
+                    @*Пешеходные тротуары*@
+                    <LotusViewActivity Activities="@Activities" IndicatorId="9" />
+
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td scope="col" colspan="10">
+                            Задача № 3 Обеспечение безопасного транспортного сообщения по автомобильным дорогам общего пользования местного значения и совершенствование улично-дорожной сети
+                        </td>
+                    </tr>
+
+                    @*Разработка и корректировка ПОДД*@
+                    <LotusViewActivity Activities="@Activities" IndicatorId="10" />
+
+                    @*Оценка уязвимости*@
+                    <LotusViewActivity Activities="@Activities" IndicatorId="11" />
+
+                </tbody>
+            </table>
+        </TabPanel>
+        <TabPanel Name="indicators">
+            <table class=".table-sm table-bordered" width="100%">
+                <thead>
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <th rowspan="2" width="5%">N п/п</th>
+                        <th rowspan="2" width="22%">Наименование целевого показателя (индикатора)</th>
+                        <th rowspan="2" width="15%">Единица измерения</th>
+                        <th scope="col" colspan="7">Значения целевых показателей (индикаторов) по годам реализации муниципальной программы</th>
+                    </tr>
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <th scope="col" width="9%">2020</th>
+                        <th scope="col" width="9%">2021</th>
+                        <th scope="col" width="9%">2022</th>
+                        <th scope="col" width="9%">2023</th>
+                        <th scope="col" width="9%">2024</th>
+                        <th scope="col" width="9%">2025</th>
+                        <th scope="col" width="9%">за период реализации муниципальной программы</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td scope="col" colspan="11">
+                            Муниципальная подпрограмма «Развитие и совершенствование сети автомобильных дорог общего пользования в Брединском муниципальном районе»
+                        </td>
+                    </tr>
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td>
+                        </td>
+                        <td scope="col" style="font-weight:bold">
+                            Задача № 1 Улучшение технического состояния и потребительских свойств автомобильных дорог и элементов дорожно-транспортной инфраструктуры
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <LotusMunlndicatorTargetValues Activities="@Activities" Indicator="@(Indicators[0])"
+                                                   SubProgramID="@(XMunicipalSubProgramData.ROAD_REPAIRS_Id)" />
+                    <LotusMunlndicatorTargetValues Activities="@Activities" Indicator="@(Indicators[1])"
+                                                   SubProgramID="@(XMunicipalSubProgramData.ROAD_REPAIRS_Id)" />
+                    <LotusMunlndicatorTargetValues Activities="@Activities" Indicator="@(Indicators[2])"
+                                                   SubProgramID="@(XMunicipalSubProgramData.ROAD_REPAIRS_Id)" />
+
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td>
+                        </td>
+                        <td scope="col" style="font-weight:bold">
+                            Задача № 2 Создание условий для формирования единой дорожной сети, круглогодично доступной для населения, обеспечение устойчивого функционирования дорожной сети
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <LotusMunlndicatorTargetValues Activities="@Activities" Indicator="@(Indicators[3])"
+                                                   SubProgramID="@(XMunicipalSubProgramData.ROAD_REPAIRS_Id)" />
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td scope="col" colspan="11">
+                            Муниципальная подпрограмма «Безопасность дорожного движения в Брединском муниципальном районе»
+                        </td>
+                    </tr>
+
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td>
+                        </td>
+                        <td scope="col" style="font-weight:bold">
+                            Задача № 1 Создание безопасных и комфортных условий для движения транспортных средств и пешеходов
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <LotusMunlndicatorTargetValues Activities="@Activities" Indicator="@(Indicators[4])"
+                                                   SubProgramID="@(XMunicipalSubProgramData.ROAD_SECURITY_Id)" />
+                    <LotusMunlndicatorTargetValues Activities="@Activities" Indicator="@(Indicators[5])"
+                                                   SubProgramID="@(XMunicipalSubProgramData.ROAD_SECURITY_Id)" />
+                    <LotusMunlndicatorTargetValues Activities="@Activities" Indicator="@(Indicators[6])"
+                                                   SubProgramID="@(XMunicipalSubProgramData.ROAD_SECURITY_Id)" />
+
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td>
+                        </td>
+                        <td scope="col" style="font-weight:bold">
+                            Задача № 2 Обеспечение повышения уровня благоустройства общественных территорий административного центра Брединского района
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <LotusMunlndicatorTargetValues Activities="@Activities" Indicator="@(Indicators[7])"
+                                                   SubProgramID="@(XMunicipalSubProgramData.ROAD_SECURITY_Id)" />
+
+                    <tr class="text-center" style="font-size:small; height:36px">
+                        <td>
+                        </td>
+                        <td scope="col" style="font-weight:bold">
+                            Задача № 3 Обеспечение безопасного транспортного сообщения по автомобильным дорогам общего пользования местного значения и совершенствование улично-дорожной сети
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <LotusMunlndicatorTargetValues Activities="@Activities" Indicator="@(Indicators[8])"
+                                                   SubProgramID="@(XMunicipalSubProgramData.ROAD_SECURITY_Id)" />
+                    <LotusMunlndicatorTargetValues Activities="@Activities" Indicator="@(Indicators[9])"
+                                                   SubProgramID="@(XMunicipalSubProgramData.ROAD_SECURITY_Id)" />
+
+                </tbody>
+            </table>
+        </TabPanel>
+        </Content>
+    </Tabs>
+}
+@code
+{
+    //
+    // СВОЙСТВА
+    //
+    /// <summary>
+    /// Статус авторизации пользователя
+    /// </summary>
+    [CascadingParameter]
+    Task<AuthenticationState> AuthenticationState { get; set; }
+
+    /// <summary>
+    /// Список мероприятий дорожной деятельности
+    /// </summary>
+    List<CMunicipalProgramActivity> Activities { get; set; }
+
+    /// <summary>
+    /// Список мероприятий дорожной деятельности
+    /// </summary>
+    List<Boolean> ProcessingActivities { get; set; }
+
+    /// <summary>
+    /// Список индикаторов по дорожной деятельности
+    /// </summary>
+    List<CMunicipalProgramIndicator> Indicators { get; set; }
+
+    //
+    // МЕТОДЫ КОМПОНЕНТА
+    //
+    /// <summary>
+    ///
+    /// </summary>
+    /// <returns></returns>
+    protected override async Task OnInitializedAsync()
+    {
+        // Индикаторы
+        Indicators = await RepositoryDatabase.MunicipalIndicators
+            .Where(indicator => indicator.ProgramId.GetValueOrDefault() == XMunicipalProgramData.ROAD_Id)
+            .OrderBy(indicator => indicator.Id)
+            .ToListAsync();
+
+        await UpdateViewActivity();
+    }
+
+    //
+    // МЕТОДЫ РАБОТЫ С МЕРОПРИЯТИЯМИ
+    //
+    /// <summary>
+    /// Обновляем представление
+    /// </summary>
+    /// <returns></returns>
+    private async Task UpdateViewActivity()
+    {
+        Activities = await RepositoryDatabase.MunicipalActivities
+            .Include(activity => activity.Program) // подгружаем данные по программам
+            .Include(activity => activity.SubProgram) // подгружаем данные по попрограммам
+            .Include(activity => activity.Contracts) // подгружаем данные по попрограммам
+            .ThenInclude(contrcat => contrcat.CertificateCompletions) // подгружаем данные по контрактам
+            .Include(activity => activity.Executor) // подгружаем данные по ответственному исполнителю
+            .OrderBy(activity => activity.BeginDate)
+            .ThenBy(activity => activity.Number)
+            .ToListAsync();
+
+        ProcessingActivities = new List<Boolean>();
+        for (Int32 i = 0; i < Activities.Count; i++)
+        {
+            ProcessingActivities.Add(false);
+        }
+
+    }
+
+    public String GetTotalPrice(TBudgetFinancing budget = TBudgetFinancing.Common)
+    {
+        Decimal value = Activities.GetAppropriationsForProgram(XMunicipalProgramData.ROAD_Id, budget);
+        return ((value / 1000).ToString("F3"));
+    }
+
+    public CMunicipalProgramActivity Find(String name, Int32 year, Int32 indicator_id, out Int32 index)
+    {
+        for (Int32 i = 0; i < Activities.Count; i++)
+        {
+            if(Activities[i].Name == name && Activities[i].BeginDate.Year == year &&
+                Activities[i].IndicatorId == indicator_id)
+            {
+                index = i;
+                return (Activities[i]);
+            }
+        }
+
+        index = -1;
+        return (null);
+    }
+
+    public String GetTotalPrice(Int32 year, TBudgetFinancing budget = TBudgetFinancing.Common)
+    {
+        Decimal value = Activities.GetAppropriationsForProgram(XMunicipalProgramData.ROAD_Id, year, budget);
+        return ((value / 1000).ToString("F3"));
+    }
+
+    public String GetRoadPrice(TBudgetFinancing budget = TBudgetFinancing.Common)
+    {
+        Decimal value = Activities.GetAppropriationsForSubProgram(XMunicipalSubProgramData.ROAD_REPAIRS_Id, budget);
+        return ((value / 1000).ToString("F3"));
+    }
+
+    public String GetRoadPrice(Int32 year, TBudgetFinancing budget = TBudgetFinancing.Common)
+    {
+        Decimal value = Activities.GetAppropriationsForSubProgram(XMunicipalSubProgramData.ROAD_REPAIRS_Id, year, budget);
+        return ((value / 1000).ToString("F3"));
+    }
+
+    public String GetSecurityPrice(TBudgetFinancing budget = TBudgetFinancing.Common)
+    {
+        Decimal value = Activities.GetAppropriationsForSubProgram(XMunicipalSubProgramData.ROAD_SECURITY_Id, budget);
+        return ((value / 1000).ToString("F3"));
+    }
+
+    public String GetSecurityPrice(Int32 year, TBudgetFinancing budget = TBudgetFinancing.Common)
+    {
+        Decimal value = Activities.GetAppropriationsForSubProgram(XMunicipalSubProgramData.ROAD_SECURITY_Id, year, budget);
+        return ((value / 1000).ToString("F3"));
+
+
+    }
+
+    public String GetTotalIndicator(CMunicipalProgramIndicator indicator)
+    {
+        String value = @Activities.GetIndicatorsValueForProgram(XMunicipalProgramData.ROAD_Id, indicator.Id).ToString();
+        return (value + " " + indicator.ValueUnit);
+    }
+
+}

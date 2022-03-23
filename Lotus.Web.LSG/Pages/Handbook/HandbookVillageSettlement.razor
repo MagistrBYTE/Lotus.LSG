@@ -1,0 +1,84 @@
+﻿@page "/Handbook/VillageSettlement"
+
+@layout Handbook
+
+@inject CRepositoryDatabase repositoryDBContext;
+
+<h4 style="margin: 12px">Сельские поселения</h4>
+
+@if (VillageSettlements == null)
+{
+    <div style="position:absolute; top:30vh; width:100%; text-align:center">
+        <h1>Сельские поселени</h1>
+        <p><i class="fas fa-spinner fa-spin"></i>Идет загрузка данных...</p>
+    </div>
+}
+else
+{
+        <DataGrid TItem="CAddressVillageSettlement" Data="@VillageSettlements"
+            Bordered="true"
+            EditMode="DataGridEditMode.Inline" 
+            Editable="AuthenticationState.Result.User.Identity.IsAuthenticated"
+            RowUpdated="@UpdateCallback"
+            RowRemoved="@DeleleCallback"
+            Resizable="true"
+            PageSize="12"
+            ResizeMode="TableResizeMode.Header">
+
+            <DataGridCommandColumn TItem="CAddressVillageSettlement" />
+            <DataGridColumn TItem="CAddressVillageSettlement" Field="@nameof(CAddressVillageSettlement.Id)" Caption="ИД" Sortable="true" Editable="false" />
+            <DataGridColumn TItem="CAddressVillageSettlement" Field="@nameof(CAddressVillageSettlement.Name)" Caption="Полное имя" Sortable="true" Editable="true" />
+            <DataGridColumn TItem="CAddressVillageSettlement" Field="@nameof(CAddressVillageSettlement.ShortName)" Caption="Краткое имя" Sortable="true" Editable="true" />
+            <DataGridColumn TItem="CAddressVillageSettlement" Field="@nameof(CAddressVillageSettlement.VillageSettlementType)" Caption="Тип" Sortable="true" Editable="true" />
+
+    </DataGrid>
+}
+
+@code
+{
+    /// <summary>
+    /// Статус авторизации пользователя
+    /// </summary>
+    [CascadingParameter]
+    Task<AuthenticationState> AuthenticationState { get; set; }
+
+    /// <summary>
+    /// Список пользователей
+    /// </summary>
+    public List<CAddressVillageSettlement> VillageSettlements { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    protected override async Task OnInitializedAsync()
+    {
+        VillageSettlements = await repositoryDBContext.AddressVillageSettlements.ToListAsync();
+    }
+
+    /// <summary>
+    /// Обновление представления
+    /// </summary>
+    /// <returns></returns>
+    protected async Task UpdateView()
+    {
+        VillageSettlements = await repositoryDBContext.AddressVillageSettlements.ToListAsync();
+    }
+
+    /// <summary>
+    /// Обновление данных
+    /// </summary>
+    /// <param name="row"></param>
+    private async Task UpdateCallback(SavedRowItem<CAddressVillageSettlement, Dictionary<String, Object>> row)
+    {
+
+    }
+
+    /// <summary>
+    /// Удаление данных
+    /// </summary>
+    /// <returns></returns>
+    private async Task DeleleCallback(CAddressVillageSettlement village_settlement)
+    {
+    }
+}

@@ -1,0 +1,61 @@
+﻿//=================================================================================
+Add-Migration Initial -Context CUserDbContext
+Update-Database -Context CUserDbContext
+==Успешно==
+
+
+//=================================================================================
+Add-Migration RenamePostIs -Context CUserDbContext
+Update-Database -Context CUserDbContext
+==Успешно==
+
+//=================================================================================
+Add-Migration RefactoringNames -Context CUserDbContext
+Update-Database -Context CUserDbContext
+==Успешно==
+
+
+//=================================================================================
+Add-Migration AddVillageSettlement -Context CRepositoryDatabase
+Update-Database -Context CRepositoryDatabase
+==Успешно==
+
+//=================================================================================
+Add-Migration AddSubjectCivil -Context CRepositoryDatabase
+Update-Database -Context CRepositoryDatabase
+==Успешно==
+
+//=================================================================================
+Add-Migration AddPublicAuthority -Context CRepositoryDatabase
+Update-Database -Context CRepositoryDatabase
+==Успешно==
+
+//=================================================================================
+Add-Migration AddContractCertificateCompletion -Context CRepositoryDatabase
+Update-Database -Context CRepositoryDatabase
+==Успешно==
+
+//=================================================================================
+Add-Migration AddMunicipalProgram -Context CRepositoryDatabase
+Update-Database -Context CRepositoryDatabase
+==Успешно==
+
+//=================================================================================
+Add-Migration AddMunicipalProgramCorrect -Context CRepositoryDatabase
+Update-Database -Context CRepositoryDatabase
+==Успешно==
+
+//=================================================================================
+Add-Migration AddMunicipalProgramSubCorrect -Context CRepositoryDatabase
+Update-Database -Context CRepositoryDatabase
+==Успешно==
+
+//=================================================================================
+Add-Migration AddContractCorrect -Context CRepositoryDatabase
+Update-Database -Context CRepositoryDatabase
+==Успешно==
+
+//=================================================================================
+Add-Migration AddActivityCorrect -Context CRepositoryDatabase
+Update-Database -Context CRepositoryDatabase
+==Успешно==

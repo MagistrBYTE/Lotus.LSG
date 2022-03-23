@@ -1,0 +1,255 @@
+﻿@page "/Users"
+
+@using Lotus.Web;
+@using Lotus.Web.Account;
+
+@using Microsoft.AspNetCore.Identity;
+
+@inject CUserDbContext userDBContext;
+@inject RoleManager<IdentityRole> roleManagers;
+@inject UserManager<CUser> userManagers;
+
+<h4 style="margin: 12px">Пользователи</h4>
+
+@if (Users == null)
+{
+    <div style="position:absolute; top:30vh; width:100%; text-align:center">
+        <h1>Пользователи</h1>
+        <p><i class="fas fa-spinner fa-spin"></i>Идет загрузка данных...</p>
+    </div>
+}
+else
+{
+    <DataGrid TItem="CUser" Data="@Users"
+        Bordered="true"
+        EditMode="DataGridEditMode.Inline" 
+        Editable="AuthenticationState.Result.User.Identity.IsAuthenticated"
+        RowUpdated="@UpdateUserCallback"
+        RowRemoved="@DeleleUserCallback"
+        Resizable="true"
+        ResizeMode="TableResizeMode.Header">
+
+        <DataGridCommandColumn TItem="CUser" />
+        <DataGridColumn TItem="CUser" Field="@nameof(CUser.UserName)" Caption="Логин" Sortable="false" Editable="false" />
+         
+        <DataGridColumn TItem="CUser" Field="@nameof(CUser.Email)" Caption="Email" Sortable="false" Editable="false" />
+            
+        <DataGridSelectColumn TItem="CUser" Field="@nameof(CUser.RoleNameText)" Caption="Роль" Editable="true">
+            <DisplayTemplate>
+                @((context as CUser)?.RoleNameText)
+            </DisplayTemplate>
+            <EditTemplate>
+            @{
+                CUser current_user = (context.Item as CUser);
+                <Select TValue="String" Multiple="true" @bind-SelectedValues="current_user.RoleNames">
+                    @foreach (var role in Roles)
+                    {
+                        <SelectItem TValue="String" Value="@(role.Name)">@role.Name</SelectItem>
+                    }
+                </Select>
+                }
+            </EditTemplate>
+        </DataGridSelectColumn>
+            
+        <DataGridColumn TItem="CUser" Field="@nameof(CUser.Name)" Caption="Имя" Sortable="true" Editable="true">
+            <DisplayTemplate>
+                @context.Name
+            </DisplayTemplate>
+            <EditTemplate>
+            <TextEdit TValue="string"
+                        Text="@((string)context.CellValue)"
+                        TextChanged="@(v => {
+                                                context.CellValue = v;
+                                                context.UpdateCell(nameof(CUser.Name), v);
+                                            })" />
+            </EditTemplate>
+        </DataGridColumn>
+        <DataGridColumn TItem="CUser" Field="@nameof(CUser.Surname)" Caption="Фамилия" Sortable="true" Editable="true">
+            <DisplayTemplate>
+                @context.Surname
+            </DisplayTemplate>
+            <EditTemplate>
+            <TextEdit TValue="string"
+                        Text="@((string)context.CellValue)"
+                        TextChanged="@(v => {
+                                                context.CellValue = v;
+                                                context.UpdateCell(nameof(CUser.Surname), v);
+                                            })" />
+            </EditTemplate>
+        </DataGridColumn>
+        <DataGridColumn TItem="CUser" Field="@nameof(CUser.Patronymic)" Caption="Отчество" Sortable="true" Editable="true" >
+            <DisplayTemplate>
+                @context.Patronymic
+            </DisplayTemplate>
+            <EditTemplate>
+            <TextEdit TValue="string"
+                        Text="@((string)context.CellValue)"
+                        TextChanged="@(v => {
+                                                context.CellValue = v;
+                                                context.UpdateCell(nameof(CUser.Patronymic), v);
+                                            })" />
+            </EditTemplate>
+        </DataGridColumn>
+
+        <DataGridSelectColumn TItem="CUser" Field="@nameof(CUser.PostId)" Caption="Должность" Editable="true">
+            <DisplayTemplate>
+                @((context as CUser)?.PostShortName)
+            </DisplayTemplate>
+            <EditTemplate>
+                <Select TValue="Int64" SelectedValue="@((Int64)(((CellEditContext)context).CellValue))"
+                    SelectedValueChanged="@(v => ((CellEditContext)context).CellValue = Posts.First(x => x.Id == v).Id)">
+                    @foreach (var post in Posts)
+                    {
+                        <SelectItem TValue="Int64" Value="@(post.Id)">@post.ShortName</SelectItem>
+                    }
+                </Select>
+            </EditTemplate>
+        </DataGridSelectColumn>
+
+        <DataGridSelectColumn TItem="CUser" Field="@nameof(CUser.FieldActivityNameText)" Caption="Сферы деятельности" Editable="true">
+            <DisplayTemplate>
+                @((context as CUser)?.FieldActivityNameText)
+            </DisplayTemplate>
+            <EditTemplate>
+            @{
+                CUser current_user = (context.Item as CUser);
+                <Select TValue="String" Multiple="true" @bind-SelectedValues="current_user.FieldActivityNames">
+                    @foreach (var field in FieldActivities)
+                    {
+                        <SelectItem TValue="String" Value="@(field.ShortName)">@field.ShortName</SelectItem>
+                    }
+                </Select>
+                }
+            </EditTemplate>
+        </DataGridSelectColumn>
+
+    </DataGrid>
+}
+
+@code
+{
+    /// <summary>
+    /// Статус авторизации пользователя
+    /// </summary>
+    [CascadingParameter]
+    Task<AuthenticationState> AuthenticationState { get; set; }
+
+    /// <summary>
+    /// Список пользователей
+    /// </summary>
+    public List<CUser> Users { get; set; }
+
+    /// <summary>
+    /// Список ролей
+    /// </summary>
+    public List<IdentityRole> Roles { get; set; }
+
+    /// <summary>
+    /// Список должностей
+    /// </summary>
+    public List<CPost> Posts { get; set; }
+
+    /// <summary>
+    /// Список сфер деятельности
+    /// </summary>
+    public List<CFieldActivity> FieldActivities { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    protected override async Task OnInitializedAsync()
+    {
+        Users = await userDBContext.Users.Include(user => user.Post)
+            .Include(user => user.FieldActivities).ToListAsync();
+        Posts = await userDBContext.Posts
+            .Include(post => post.Users).ToListAsync();
+        FieldActivities = await userDBContext.FieldActivities
+            .Include(field => field.Users).ToListAsync();
+
+        Roles = await roleManagers.Roles.ToListAsync();
+
+        for (Int32 i = 0; i < Users.Count; i++)
+        {
+            CUser user = Users[i];
+            user.UpadeFieldActivityName();
+            await user.LoadAllRolesName(userManagers);
+        }
+    }
+
+    /// <summary>
+    /// Обновление представления
+    /// </summary>
+    /// <returns></returns>
+    protected async Task UpdateView()
+    {
+        Users = await userDBContext.Users.Include(user => user.Post)
+            .Include(user => user.FieldActivities).ToListAsync();
+
+        for (Int32 i = 0; i < Users.Count; i++)
+        {
+            CUser user = Users[i];
+            user.UpadeFieldActivityName();
+            await user.LoadAllRolesName(userManagers);
+        }
+    }
+
+    /// <summary>
+    /// Обновление данных пользователя
+    /// </summary>
+    /// <param name="row"></param>
+    private async Task UpdateUserCallback(SavedRowItem<CUser, Dictionary<String, Object>> row)
+    {
+        CUser edit_user = row.Item;
+        if (edit_user != null)
+        {
+            foreach(var props in row.Values)
+            {
+                if(props.Key == nameof(CUser.Name))
+                {
+                    edit_user.Name = (String)props.Value;
+                }
+                if(props.Key == nameof(CUser.Surname))
+                {
+                    edit_user.Surname = (String)props.Value;
+                }
+                if(props.Key == nameof(CUser.Patronymic))
+                {
+                    edit_user.Patronymic = (String)props.Value;
+                }
+                if(props.Key == nameof(CUser.Post))
+                {
+                    edit_user.Post = (CPost)props.Value;
+                }
+                if(props.Key == nameof(CUser.RoleNameText))
+                {
+                    //CUser edit_user = row.Item;
+                    //var result = await userManagers.AddToRolesAsync(edit_user, edit_user.RoleNames);
+                    //if(!result.Succeeded)
+                    //{
+                    //    Console.Write(result.Errors);
+                    //}
+                }
+                if(props.Key == nameof(CUser.FieldActivityNameText))
+                {
+                    edit_user.UpadeFieldActivityEntity(FieldActivities);
+                }
+            }
+
+            // Обновляем базу данных
+            userDBContext.Users.Update(edit_user);
+            await userDBContext.SaveChangesAsync();
+        }
+    }
+
+    /// <summary>
+    /// Удаление пользователя
+    /// </summary>
+    /// <returns></returns>
+    private async Task DeleleUserCallback(CUser user)
+    {
+        // Удаляем с базы данных
+        userDBContext.Users.Remove(user);
+        await userDBContext.SaveChangesAsync();
+    }
+}

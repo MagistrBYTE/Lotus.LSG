@@ -1,0 +1,113 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <OutputPath>..\Output\$(Configuration)\</OutputPath>
+    <RootNamespace>Lotus</RootNamespace>
+    <Authors>MagistrBYTE aka DanielDem</Authors>
+    <Copyright>MagistrBYTE aka DanielDem</Copyright>
+    <Company>LotusPlatform</Company>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;USE_WINDOWS</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Source\Base\Contract\View\LotusLSGContractDataSelector.cs" />
+    <Compile Remove="Source\Base\Financing\View\LotusLSGFinancingEntityDataSelector.cs" />
+    <Compile Remove="Source\Base\MunicipalProgram\View\LotusLSGMunicipalProgramDataSelector.cs" />
+    <Compile Remove="Source\UrbanPlanning\View\LotusUrbanPlanningView.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="LotusLSGApp.xaml" />
+    <Page Remove="LotusLSGApp.xaml" />
+    <Page Remove="Source\Base\Contract\View\ContractTemplates.xaml" />
+    <Page Remove="Source\Base\Financing\View\FinancingEntityTemplates.xaml" />
+    <Page Remove="Source\Base\MunicipalProgram\View\MunicipalProgramStyles.xaml" />
+    <Page Remove="Source\Base\MunicipalProgram\View\MunicipalProgramTemplates.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="LotusLSGApp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Lotus.LSG\Source\Base\Address\LotusLSGBaseAddress.cs" Link="Source\Base\Address\LotusLSGBaseAddress.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Address\LotusLSGBaseAddressStreet.cs" Link="Source\Base\Address\LotusLSGBaseAddressStreet.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Address\LotusLSGBaseAddressVillage.cs" Link="Source\Base\Address\LotusLSGBaseAddressVillage.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Address\LotusLSGBaseAddressVillageSettlement.cs" Link="Source\Base\Address\LotusLSGBaseAddressVillageSettlement.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\CertificateCompletion\LotusLSGCertificateCompletion.cs" Link="Source\Base\CertificateCompletion\LotusLSGCertificateCompletion.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Common\LotusLSGBaseCommon.cs" Link="Source\Base\Common\LotusLSGBaseCommon.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Common\LotusLSGBaseStorageDocument.cs" Link="Source\Base\Common\LotusLSGBaseStorageDocument.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Contract\LotusLSGContract.cs" Link="Source\Base\Contract\LotusLSGContract.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Contract\LotusLSGContractCommon.cs" Link="Source\Base\Contract\LotusLSGContractCommon.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Contract\LotusLSGContractSet.cs" Link="Source\Base\Contract\LotusLSGContractSet.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Financing\LotusLSGBaseFinancingBudget.cs" Link="Source\Base\Financing\LotusLSGBaseFinancingBudget.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Financing\LotusLSGBaseFinancingPrice.cs" Link="Source\Base\Financing\LotusLSGBaseFinancingPrice.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\MunicipalProgram\LotusLSGMunicipalProgram.cs" Link="Source\Base\MunicipalProgram\LotusLSGMunicipalProgram.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\MunicipalProgram\LotusLSGMunicipalProgramActivity.cs" Link="Source\Base\MunicipalProgram\LotusLSGMunicipalProgramActivity.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\MunicipalProgram\LotusLSGMunicipalProgramCommon.cs" Link="Source\Base\MunicipalProgram\LotusLSGMunicipalProgramCommon.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\MunicipalProgram\LotusLSGMunicipalProgramIndicator.cs" Link="Source\Base\MunicipalProgram\LotusLSGMunicipalProgramIndicator.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\MunicipalProgram\LotusLSGMunicipalProgramSub.cs" Link="Source\Base\MunicipalProgram\LotusLSGMunicipalProgramSub.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\SubjectCivil\LotusLSGSubjectCivilBase.cs" Link="Source\Base\SubjectCivil\LotusLSGSubjectCivilBase.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\SubjectCivil\LotusLSGSubjectCivilCommon.cs" Link="Source\Base\SubjectCivil\LotusLSGSubjectCivilCommon.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\SubjectCivil\LotusLSGSubjectCivilIndividual.cs" Link="Source\Base\SubjectCivil\LotusLSGSubjectCivilIndividual.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\SubjectCivil\LotusLSGSubjectCivilLegalEntity.cs" Link="Source\Base\SubjectCivil\LotusLSGSubjectCivilLegalEntity.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\SubjectCivil\LotusLSGSubjectCivilPublicAuthority.cs" Link="Source\Base\SubjectCivil\LotusLSGSubjectCivilPublicAuthority.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dirkster.AvalonDock" Version="4.70.1" />
+    <PackageReference Include="Dirkster.AvalonDock.Themes.Aero" Version="4.70.1" />
+    <PackageReference Include="Fluent.Ribbon" Version="9.0.4" />
+    <PackageReference Include="Lotus.Core" Version="1.2.0" />
+    <PackageReference Include="Lotus.Windows" Version="1.2.0" />
+    <PackageReference Include="Lotus.Windows.UI" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="5.0.4" />
+    <PackageReference Include="SQLitePCLRaw.core" Version="2.0.7" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Database\" />
+    <Folder Include="Source\Base\Address\" />
+    <Folder Include="Source\Base\Common\" />
+    <Folder Include="Source\Base\Contract\" />
+    <Folder Include="Source\Base\Contract\View\" />
+    <Folder Include="Source\Base\Financing\View\" />
+    <Folder Include="Source\Base\MunicipalProgram\View\" />
+    <Folder Include="Source\Base\SubjectCivil\" />
+    <Folder Include="Source\Base\CertificateCompletion\" />
+    <Folder Include="Source\Infrastructure\GasSupply\" />
+    <Folder Include="Source\Infrastructure\HeatSupply\" />
+    <Folder Include="Source\Infrastructure\PowerSupply\" />
+    <Folder Include="Source\Infrastructure\WaterSupply\" />
+    <Folder Include="Source\Repository\Database\" />
+    <Folder Include="Source\Road\Common\" />
+    <Folder Include="Source\Road\Elements\" />
+    <Folder Include="Source\UrbanPlanning\Architecture\" />
+    <Folder Include="Source\UrbanPlanning\Base\" />
+    <Folder Include="Source\UrbanPlanning\Housing\" />
+    <Folder Include="Source\UrbanPlanning\ISUD\View\" />
+    <Folder Include="Source\UrbanPlanning\Lands\" />
+    <Folder Include="Source\UrbanPlanning\Regions\" />
+    <Folder Include="Source\UrbanPlanning\Social\" />
+    <Folder Include="Source\UrbanPlanning\View\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

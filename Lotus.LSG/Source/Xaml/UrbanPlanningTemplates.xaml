@@ -1,0 +1,251 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib"
+					xmlns:isud="clr-namespace:Lotus.ISUD"
+					xmlns:cntl="http://schemas.cubex.controls">
+
+	<!--#region ШАБЛОНЫ ДАННЫХ-->
+	<!--ПУСТОЙ ШАБЛОН ДАННЫХ-->
+	<HierarchicalDataTemplate x:Key="KeyEmpty" ItemsSource="{Binding Items}">
+		<TextBlock Text="{Binding Name}"/>
+	</HierarchicalDataTemplate>
+
+	<!--ВСЕ ЗЕМЛИ ПО КАТЕГОРИЯМ-->
+	<HierarchicalDataTemplate x:Key="KeyLandInfrastructure" DataType="{x:Type isud:CLandInfrastructure}" ItemsSource="{Binding }">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_ground_all.png" Margin="0" Width="20" Height="20" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+			<TextBlock Text=" [" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="{Binding Lands.Count}" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="]" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeyLand" DataType="{x:Type isud:CLandCategory}" ItemsSource="{Binding LandElements}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_ground_common.png" Margin="0" Width="16" Height="16" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+			<TextBlock Text=" [" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="{Binding LandElements.Count}" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="]" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+    <HierarchicalDataTemplate x:Key="KeyLandProtected" DataType="{x:Type isud:CLandPermittedUse}" ItemsSource="{Binding Lands}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_ground_common.png" Margin="0" Width="16" Height="16" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+			<TextBlock Text=" [" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="{Binding Lands.Count}" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="]" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeyLandElement" DataType="{x:Type isud:CLandElement}">
+		<TextBlock Text="{Binding Name}" />
+	</HierarchicalDataTemplate>
+
+	<!--ВСЕ ТЕРРИТОРИИ СПЕЦИАЛЬНОГО НАЗНАЧЕНИЯ-->
+	<HierarchicalDataTemplate x:Key="KeySpecialInfrastructure" DataType="{x:Type isud:CSpecialInfrastructure}" ItemsSource="{Binding Specials}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_special_all.png" Margin="0" Width="20" Height="20" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+			<TextBlock Text=" [" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="{Binding Specials.Count}" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="]" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeySpecial" DataType="{x:Type isud:CSpecial}" ItemsSource="{Binding SpecialElements}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Name="imageIcon" Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_special_cattle.png" Margin="0" Width="16" Height="16" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+			<TextBlock Text=" [" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="{Binding SpecialElements.Count}" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="]" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+		</StackPanel>
+		<HierarchicalDataTemplate.Triggers>
+			<DataTrigger Binding="{Binding SpecialType}" Value="Cemetery">
+				<!--<Setter TargetName="imageIcon" Property="Source" Value="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_special_cemetery.png"/>-->
+			</DataTrigger>
+			<DataTrigger Binding="{Binding SpecialType}" Value="Landfill">
+				<!--<Setter TargetName="imageIcon" Property="Source" Value="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_special_garbage.png"/>-->
+			</DataTrigger>
+			<DataTrigger Binding="{Binding SpecialType}" Value="CattleCemetery">
+				<!--<Setter TargetName="imageIcon" Property="Source" Value="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_special_cattle.png"/>-->
+			</DataTrigger>
+		</HierarchicalDataTemplate.Triggers>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeySpecialElement" DataType="{x:Type isud:CSpecialElement}">
+		<TextBlock Text="{Binding Name}" />
+	</HierarchicalDataTemplate>
+
+	<!-- ОБЪЕКТЫ ПЕРЕВОДА -->
+	<HierarchicalDataTemplate x:Key="KeyTransferInfrastructure" DataType="{x:Type isud:CTransferInfrastructure}" ItemsSource="{Binding Transfers}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_transfer_all.png" Margin="0" Width="20" Height="20" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+			<TextBlock Text=" [" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="{Binding Transfers.Count}" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="]" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeyTransfer" DataType="{x:Type isud:CTransfer}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_transfer_item.png" Margin="0" Width="16" Height="16" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+
+	<!--ИНЖЕНЕРНАЯ ИНФРАСТРУКТУРА-->
+	<HierarchicalDataTemplate x:Key="KeyEngineeringInfrastructure" DataType="{x:Type isud:CEngineeringInfrastructure}" ItemsSource="{Binding EngineeringElements}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_eng_base.png" Margin="0" Width="24" Height="24" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+			<TextBlock Text=" [" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="{Binding EngineeringElements.Count}" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="]" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeyWaterSupply" DataType="{x:Type isud:CWaterSupply}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_eng_water.png" Margin="0" Width="16" Height="16" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeyPowerSupply" DataType="{x:Type isud:CPowerSupply}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_eng_power.png" Margin="0" Width="16" Height="16" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeyGasSupply" DataType="{x:Type isud:CGasSupply}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_eng_gas.png" Margin="0" Width="16" Height="16" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeyHeatSupply" DataType="{x:Type isud:CHeatSupply}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_eng_heat.png" Margin="0" Width="16" Height="16" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>	
+
+	<!--ТРАНСПОРТНАЯ ИНФРАСТРУКТУРА-->
+	<HierarchicalDataTemplate x:Key="KeyRoadInfrastructure" DataType="{x:Type isud:CRoadInfrastructure}" ItemsSource="{Binding RoadElements}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Road/road_doc_empty.png" Margin="0" Width="20" Height="20" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+			<TextBlock Text=" [" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="{Binding RoadElements.Count}" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="]" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeyRoadElement" DataType="{x:Type isud:CRoadElement}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Road/road_section_empty.png" Margin="0" Width="16" Height="16" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+
+	<!-- ЖИЛИЩНАЯ ИНФРАСТРУКТУРА -->
+	<HierarchicalDataTemplate x:Key="KeyHousingInfrastructure" DataType="{x:Type isud:CHousingInfrastructure}" ItemsSource="{Binding HouseElements}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_house_all.png" Margin="0" Width="20" Height="20" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+			<TextBlock Text=" [" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="{Binding HouseElements.Count}" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="]" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeyHouseElement" DataType="{x:Type isud:CHouseElement}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_house_element.png" Margin="0" Width="16" Height="16" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+
+	<!-- СОЦИАЛЬНАЯ ИНФРАСТРУКТУРА -->
+	<HierarchicalDataTemplate x:Key="KeySocialInfrastructure" DataType="{x:Type isud:CSocialInfrastructure}" ItemsSource="{Binding SocialElements}" >
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_social_all.png" Margin="0" Width="20" Height="20" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeySocialElement" DataType="{x:Type isud:CSocialElement}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_house_element.png" Margin="0" Width="16" Height="16" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+
+	<!-- НАСЕЛЕННЫЕ ПУНКТЫ -->
+	<HierarchicalDataTemplate x:Key="KeyVillageInfrastructure" DataType="{x:Type isud:CVillageInfrastructure}" ItemsSource="{Binding Villages}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/ISUD/isud_doc_empty_large.png" Margin="0" Width="20" Height="20" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+			<TextBlock Text=" [" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="{Binding Villages.Count}" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+			<TextBlock Text="]" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeyVillage" DataType="{x:Type isud:CVillage}" ItemsSource="{Binding Items}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/Urban/urban_village_empty.png" Margin="0" Width="16" Height="16" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" />
+		</StackPanel>
+	</HierarchicalDataTemplate>
+
+	<!-- СЕЛЬСКИЕ ПОСЕЛЕНИЯ -->
+	<HierarchicalDataTemplate x:Key="KeyVillageSettlementInfrastructure" DataType="{x:Type isud:CVillageSettlementInfrastructure}" ItemsSource="{Binding VillageSettlements}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/ISUD/isud_terrplan_empty.png" Margin="0" Width="20" Height="20" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0">
+				
+			</TextBlock>
+		</StackPanel>
+	</HierarchicalDataTemplate>
+	<HierarchicalDataTemplate x:Key="KeyVillageSettlement" DataType="{x:Type isud:CVillageSettlement}" ItemsSource="{Binding Items}">
+		<StackPanel Orientation="Horizontal">
+			<!--<Image Source="pack://application:,,,/LotusFramework;component/Resources/ISUD/isud_zoning_empty.png" Margin="0" Width="20" Height="20" VerticalAlignment="Center" />-->
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" >
+			</TextBlock>
+		</StackPanel>
+	</HierarchicalDataTemplate>
+
+	<!-- СЕЛЕКТОР ШАБЛОНА ДАННЫХ ДЛЯ ЭЛЕМЕНТА ОБОЗРЕВАТЕЛЯ -->
+	<isud:CUrbanPlanningSolutionDataSelector x:Key="KeyUPSolutionDataSelector"
+		LandInfrastructure ="{StaticResource KeyLandInfrastructure}"
+		Land="{StaticResource KeyLand}"
+		LandProtected="{StaticResource KeyLandProtected}"
+		LandElement="{StaticResource KeyLandElement}"
+									
+		SpecialInfrastructure="{StaticResource KeySpecialInfrastructure}"
+		Special="{StaticResource KeySpecial}"
+		SpecialElements="{StaticResource KeySpecialElement}"
+		
+		TransferInfrastructure="{StaticResource KeyTransferInfrastructure}"
+		Transfer="{StaticResource KeyTransfer}"
+			
+		EngineeringInfrastructure ="{StaticResource KeyEngineeringInfrastructure}"
+		WaterSupply ="{StaticResource KeyWaterSupply}"
+		PowerSupply ="{StaticResource KeyPowerSupply}"
+		GasSupply ="{StaticResource KeyGasSupply}"
+		HeatSupply ="{StaticResource KeyHeatSupply}"
+
+		RoadInfrastructure ="{StaticResource KeyRoadInfrastructure}"
+		RoadElement ="{StaticResource KeyRoadElement}"
+									
+		HousingInfrastructure ="{StaticResource KeyHousingInfrastructure}"
+		HouseElement ="{StaticResource KeyHouseElement}"
+									
+		SocialInfrastructure ="{StaticResource KeySocialInfrastructure}"
+		SocialElement ="{StaticResource KeySocialElement}"
+
+		VillageInfrastructure ="{StaticResource KeyVillageInfrastructure}"
+		Village ="{StaticResource KeyVillage}"
+
+		VillageSettlementInfrastructure="{StaticResource KeyVillageSettlementInfrastructure}"
+		VillageSettlement ="{StaticResource KeyVillageSettlement}"
+									
+		ElementDataTemplate ="{StaticResource KeyEmpty }"/>
+	<!--#endregion-->
+	
+</ResourceDictionary>

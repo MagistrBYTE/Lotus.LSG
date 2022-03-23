@@ -1,0 +1,71 @@
+﻿@page "/Handbook"
+@inherits LayoutComponentBase
+@layout MainLayout
+
+<div class="row m-2">
+    <div class="col-md-3 border bg-light">
+        <nav class="nav flex-column">
+
+            <h5>Субъекты гражданских правоотношений</h5>
+
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <NavLink href="/Handbook/SubjectPersons" class="nav-link" ActiveClass="nav-link active">
+                        Индивидуальные предприниматели
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink href="/Handbook/SubjectEntities" class="nav-link" ActiveClass="nav-link active">
+                        Юридические лица
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink href="/Handbook/SubjectAuthorities" class="nav-link" ActiveClass="nav-link active">
+                        Органы публичной власти
+                    </NavLink>
+                </li>
+            </ul>
+
+            <h5>Территориально-адресное хозяйство</h5>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <NavLink href="/Handbook/VillageSettlement" class="nav-link" ActiveClass="nav-link active">
+                        Сельские поселения
+                    </NavLink>
+                </li>
+            </ul>
+
+            <h5>Контракты и акты</h5>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <NavLink href="/Handbook/Contracts" class="nav-link" ActiveClass="nav-link active">
+                        Контракты
+                    </NavLink>
+                </li>
+            </ul>
+
+
+            <h5>Муниципальные программы и данные</h5>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <NavLink href="/Handbook/MunicipalProgram" class="nav-link" ActiveClass="nav-link active">
+                        Муниципальные программы
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                  <NavLink href="/Handbook/MunicipalSubProgram" class="nav-link" ActiveClass="nav-link active">
+                        Муниципальные подпрограммы
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                  <NavLink href="/Handbook/MunicipalIndicator" class="nav-link" ActiveClass="nav-link active">
+                        Индикаторы программ
+                    </NavLink>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="col-md-9 border bg-light">
+        @Body
+    </div>
+</div>

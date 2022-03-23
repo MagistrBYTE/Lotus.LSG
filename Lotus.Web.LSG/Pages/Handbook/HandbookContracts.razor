@@ -1,0 +1,127 @@
+﻿@page "/Handbook/Contracts"
+
+@layout Handbook
+
+@inject CRepositoryDatabase repositoryDBContext;
+
+<h4 style="margin: 12px">Контракты</h4>
+
+@if (Contracts == null)
+{
+    <div style="position:absolute; top:30vh; width:100%; text-align:center">
+        <h1>Контракты</h1>
+        <p><i class="fas fa-spinner fa-spin"></i>Идет загрузка данных...</p>
+    </div>
+}
+else
+{
+    <DataGrid TItem="CContract" Data="@Contracts"
+        Bordered="true"
+        EditMode="DataGridEditMode.Inline" 
+        Editable="AuthenticationState.Result.User.Identity.IsAuthenticated"
+        RowInserted="@AddCallback"
+        RowUpdated="@UpdateCallback"
+        RowRemoved="@DeleleCallback"
+        Resizable="true"
+        PageSize="12"
+        ResizeMode="TableResizeMode.Header">
+        <DataGridColumns>
+            <DataGridCommandColumn TItem="CContract" />
+            <DataGridColumn TItem="CContract" Field="@nameof(CContract.Id)" Caption="ИД" Sortable="true" Editable="false" />
+            <DataGridColumn TItem="CContract" Field="@nameof(CContract.Name)" Caption="Полное имя" Sortable="true" Editable="true" />
+            <DataGridColumn TItem="CContract" Field="@nameof(CContract.ValueUnit)" Caption="Начало" Sortable="true" Editable="true" />
+        </DataGridColumns>
+    </DataGrid>
+}
+
+@code
+{
+    /// <summary>
+    /// Статус авторизации пользователя
+    /// </summary>
+    [CascadingParameter]
+    Task<AuthenticationState> AuthenticationState { get; set; }
+
+    /// <summary>
+    /// Список программ
+    /// </summary>
+    public List<CContract> Contracts { get; set; }
+
+    /// <summary>
+    /// Выбранная строка
+    /// </summary>
+    public CContract SelectedRow { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    protected override async Task OnInitializedAsync()
+    {
+        //await base.OnInitializedAsync();
+        //Contracts = await repositoryDBContext.Contracts.ToListAsync();
+        Contracts = new List<CContract>();
+        CContract contract = new CContract();
+        Contracts.Add(contract);
+    }
+
+    /// <summary>
+    /// Обновление представления
+    /// </summary>
+    /// <returns></returns>
+    protected async Task UpdateView()
+    {
+        //Contracts = await repositoryDBContext.Contracts.ToListAsync();
+    }
+
+    /// <summary>
+    /// Добавление данных
+    /// </summary>
+    /// <param name="row"></param>
+    private async Task AddCallback(SavedRowItem<CContract, Dictionary<String, Object>> row)
+    {
+        CContract contract = row.Item;
+
+        // Добавляем и обновляем базу данных
+        //repositoryDBContext.Contracts.Add(contract);
+        //await repositoryDBContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Обновление данных
+    /// </summary>
+    /// <param name="row"></param>
+    private async Task UpdateCallback(SavedRowItem<CContract, Dictionary<String, Object>> row)
+    {
+        CContract edit_item = row.Item;
+        if (edit_item != null)
+        {
+            foreach(var props in row.Values)
+            {
+                if(props.Key == nameof(CContract.Name))
+                {
+                    edit_item.Name = (String)props.Value;
+                }
+                if(props.Key == nameof(CContract.ValueUnit))
+                {
+                    edit_item.ValueUnit = (String)props.Value;
+                }
+            }
+
+            // Обновляем базу данных
+            //repositoryDBContext.Contracts.Update(edit_item);
+            //await repositoryDBContext.SaveChangesAsync();
+        }
+    }
+
+    /// <summary>
+    /// Удаление данных
+    /// </summary>
+    /// <returns></returns>
+    private async Task DeleleCallback(CContract contract)
+    {
+        // Удаляем с базы данных
+        //repositoryDBContext.Contracts.Remove(contract);
+        //await repositoryDBContext.SaveChangesAsync();
+    }
+}

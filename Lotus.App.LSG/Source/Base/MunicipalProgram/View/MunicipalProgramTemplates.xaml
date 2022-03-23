@@ -1,0 +1,155 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:lsg="clr-namespace:Lotus.LSG"
+					xmlns:core="http://schemas.cubex.core"
+					xmlns:cntl="http://schemas.cubex.controls">
+
+	<!--ШАБЛОНЫ-->
+	<!--Муниципальная программа-->
+	<HierarchicalDataTemplate x:Key="ProgramTemplateKey" DataType="{x:Type lsg:CMunicipalProgram}" ItemsSource="{Binding IModels}">
+		<Border x:Name="borderMain" CornerRadius="2" BorderBrush="Gray" BorderThickness="1" Margin="2" MinWidth="260" MinHeight="24">
+			<StackPanel Orientation="Vertical">
+				<StackPanel Orientation="Horizontal" Margin="2">
+					<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,4,0" FontWeight="Bold" FontSize="14"/>
+					<TextBlock Text="{Binding Budget, StringFormat='[{0:c}]'}" VerticalAlignment="Center" Margin="4,0,0,0" Foreground="Blue" FontSize="14" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Местный" VerticalAlignment="Center" Margin="2,0,0,0" FontSize="12" FontFamily="Arial Narrow" />
+					<TextBlock Text="{Binding LocalBudget, StringFormat='[{0:c}]'}" Style="{StaticResource TextBlockFinanceValueStyleKey}" />
+					<TextBlock Text="Областной" VerticalAlignment="Center" Margin="2,0,0,0" FontSize="12" FontFamily="Arial Narrow" />
+					<TextBlock Text="{Binding RegionalBudget, StringFormat='[{0:c}]'}" Style="{StaticResource TextBlockFinanceValueStyleKey}"/>
+				</StackPanel>
+			</StackPanel>
+		</Border>
+		<HierarchicalDataTemplate.Triggers>
+			<DataTrigger Binding="{Binding IsPresented}" Value="True">
+				<Setter TargetName="borderMain" Property="BorderBrush" Value="Blue"/>
+				<Setter TargetName="borderMain" Property="BorderThickness" Value="3"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding NotCalculation}" Value="True">
+				<Setter TargetName="borderMain" Property="Background" Value="LightGray"/>
+			</DataTrigger>
+		</HierarchicalDataTemplate.Triggers>
+	</HierarchicalDataTemplate>
+
+	<!--Муниципальная подпрограмма-->
+	<HierarchicalDataTemplate x:Key="SubProgramTemplateKey" ItemsSource="{Binding IModels}">
+		<Border x:Name="borderMain" CornerRadius="2" BorderBrush="Gray" BorderThickness="1" Margin="2" MinWidth="240" MinHeight="24">
+			<StackPanel Orientation="Vertical">
+				<StackPanel Orientation="Horizontal" Margin="2">
+					<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,4,0" FontWeight="Bold" FontSize="14"/>
+					<TextBlock Text="{Binding Budget, StringFormat='[{0:c}]'}" VerticalAlignment="Center" Margin="4,0,0,0" Foreground="Blue" FontSize="14" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="2">
+					<TextBlock Text="Местный" VerticalAlignment="Center" Margin="2,0,0,0" FontSize="12" FontFamily="Arial Narrow" />
+					<TextBlock Text="{Binding LocalBudget, StringFormat='[{0:c}]'}" Style="{StaticResource TextBlockFinanceValueStyleKey}" />
+					<TextBlock Text="Областной" VerticalAlignment="Center" Margin="2,0,0,0" FontSize="12" FontFamily="Arial Narrow" />
+					<TextBlock Text="{Binding RegionalBudget, StringFormat='[{0:c}]'}" Style="{StaticResource TextBlockFinanceValueStyleKey}"/>
+				</StackPanel>
+			</StackPanel>
+		</Border>
+		<HierarchicalDataTemplate.Triggers>
+			<DataTrigger Binding="{Binding IsPresented}" Value="True">
+				<Setter TargetName="borderMain" Property="BorderBrush" Value="Blue"/>
+				<Setter TargetName="borderMain" Property="BorderThickness" Value="3"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding NotCalculation}" Value="True">
+				<Setter TargetName="borderMain" Property="Background" Value="LightGray"/>
+			</DataTrigger>
+		</HierarchicalDataTemplate.Triggers>
+	</HierarchicalDataTemplate>
+
+	<!--Целевые индикаторы муниципальной программы-->
+	<HierarchicalDataTemplate x:Key="IndicatorsTemplateKey" DataType="{x:Type lsg:CMunicipalProgramIndicators}" ItemsSource="{Binding IModels}">
+		<Border CornerRadius="2" BorderBrush="Gray" BorderThickness="1" Margin="2" MinWidth="240" MinHeight="24">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock x:Name="textName" Text="{Binding GroupPropertyValue}" VerticalAlignment="Center" Margin="4,0,0,0" FontSize="12" FontWeight="Bold" FontFamily="Verdana" Foreground="BlueViolet" />
+				<TextBlock Text=" [" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+				<TextBlock Text="{Binding IModels.Count}" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+				<TextBlock Text="]" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+				<TextBlock x:Name="textPlanedValue" Text="{Binding PlanedValue}" 
+						   VerticalAlignment="Center" Margin="4,0,0,0" FontSize="12"  FontWeight="Bold" Visibility="Hidden"/>
+			</StackPanel>
+		</Border>
+		<HierarchicalDataTemplate.Triggers>
+			<DataTrigger Binding="{Binding IsSelected}" Value="True">
+				<Setter TargetName="textName" Property="TextBlock.Foreground" Value="LightCoral" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding GroupPropertyName}" Value="Desc">
+				<Setter TargetName="textPlanedValue" Property="Visibility" Value="Visible"/>
+			</DataTrigger>
+		</HierarchicalDataTemplate.Triggers>
+	</HierarchicalDataTemplate>
+
+	<!--Целевой индикатор муниципальной программы-->
+	<HierarchicalDataTemplate x:Key="IndicatorTemplateKey" DataType="{x:Type lsg:CMunicipalProgramIndicator}">
+		<Border CornerRadius="2" BorderBrush="Gray" BorderThickness="1" Margin="2" MinWidth="240" MinHeight="24">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="{Binding DisplayName}" VerticalAlignment="Center" Margin="4,0,0,0" FontSize="12"  FontWeight="Bold" />
+				<TextBlock Text="{Binding PlanedValue}" VerticalAlignment="Center" Margin="4,0,0,0" FontSize="12"  FontWeight="Bold" />
+			</StackPanel>
+		</Border>
+	</HierarchicalDataTemplate>
+
+	<!--Мероприятия муниципальной программы-->
+	<HierarchicalDataTemplate x:Key="ActivitiesTemplateKey" DataType="{x:Type lsg:CMunicipalProgramActivities}" ItemsSource="{Binding IModels}">
+		<Border x:Name="borderMain" CornerRadius="2" BorderBrush="Gray" BorderThickness="1" Margin="2" MinWidth="240" MinHeight="24">
+			<StackPanel Orientation="Vertical">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock x:Name="textName" Text="{Binding GroupPropertyValue}" VerticalAlignment="Center" Margin="4,0,0,0" FontSize="12" FontWeight="Bold" FontFamily="Verdana" Foreground="BlueViolet" />
+					<TextBlock Text=" [" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+					<TextBlock Text="{Binding IModels.Count}" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+					<TextBlock Text="]" Foreground="Blue" VerticalAlignment="Center" Margin="2,0,0,0" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="{Binding LocalBudget, StringFormat={}{0:c}}" VerticalAlignment="Center" Margin="4,0,0,0" FontSize="12"  FontWeight="Bold" />
+				</StackPanel>
+			</StackPanel>
+		</Border>
+		<HierarchicalDataTemplate.Triggers>
+			<DataTrigger Binding="{Binding IsSelected}" Value="True">
+				<Setter TargetName="textName" Property="TextBlock.Foreground" Value="LightCoral" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding IsPresented}" Value="True">
+				<Setter TargetName="borderMain" Property="BorderBrush" Value="Blue"/>
+				<Setter TargetName="borderMain" Property="BorderThickness" Value="3"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding NotCalculation}" Value="True">
+				<Setter TargetName="borderMain" Property="Background" Value="LightGray"/>
+			</DataTrigger>
+		</HierarchicalDataTemplate.Triggers>
+	</HierarchicalDataTemplate>
+
+	<!--Мероприятие-->
+	<HierarchicalDataTemplate x:Key="ActivityTemplateKey" DataType="{x:Type lsg:CMunicipalProgramActivity}" >
+		<Border x:Name="borderMain" CornerRadius="2" BorderBrush="Gray" BorderThickness="1" Margin="2" MinWidth="240">
+			<StackPanel Orientation="Vertical">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0,0,0" FontSize="12"  FontWeight="Bold" />
+					<TextBlock Text="{Binding LocalBudget, StringFormat='[{0:c}]'}" VerticalAlignment="Center" Margin="4,0,0,0" FontSize="12"  FontWeight="Bold" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					
+				</StackPanel>
+			</StackPanel>
+		</Border>
+		<HierarchicalDataTemplate.Triggers>
+			<DataTrigger Binding="{Binding IsPresented}" Value="True">
+				<Setter TargetName="borderMain" Property="BorderBrush" Value="Blue"/>
+				<Setter TargetName="borderMain" Property="BorderThickness" Value="3"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding NotCalculation}" Value="True">
+				<Setter TargetName="borderMain" Property="Background" Value="LightGray"/>
+			</DataTrigger>
+		</HierarchicalDataTemplate.Triggers>
+	</HierarchicalDataTemplate>
+
+	<!--Селектор шаблона-->
+	<lsg:CMunicipalProgramDataSelector x:Key="MunicipalProgramDataSelectorKey"
+									Program="{StaticResource ProgramTemplateKey}"
+									SubProgram="{StaticResource SubProgramTemplateKey}"
+									Indicators="{StaticResource IndicatorsTemplateKey}"
+									Indicator="{StaticResource IndicatorTemplateKey}"
+									Activities="{StaticResource ActivitiesTemplateKey}"
+									Activity="{StaticResource ActivityTemplateKey}"/>
+</ResourceDictionary>

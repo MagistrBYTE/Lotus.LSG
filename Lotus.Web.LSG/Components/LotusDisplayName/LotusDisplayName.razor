@@ -1,0 +1,58 @@
+﻿@namespace Lotus.Web.Components
+
+@inherits ComponentBase
+
+@switch (Offset)
+{
+	default:
+	case 1:
+		{
+			<span>&nbsp;</span>
+		}break;
+	case 2:
+		{
+			<span>&nbsp; &nbsp;</span>
+		}
+		break;
+	case 3:
+		{
+			<span>&nbsp; &nbsp; &nbsp;</span>
+		}
+		break;
+	case 4:
+		{
+			<span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
+		}
+		break;
+}
+
+
+@if (NotCalculation)
+{
+	@if (IsSmallText)
+	{
+		<span class="grid_column_cell_small text_not_calc">@Text</span>
+	}
+	else
+	{
+		<span class="grid_column_cell text_not_calc">@Text</span>
+	}
+
+	if (IsBadge)
+	{
+		<br/>
+		<span class="badge bg-warning text-dark">Не учитывается</span>
+	}
+}
+
+else
+{
+	@if (IsSmallText)
+    {
+		<span class="grid_column_cell_small">@Text</span>
+    }
+    else
+    {
+		<span class="grid_column_cell">@Text</span>
+    }
+}

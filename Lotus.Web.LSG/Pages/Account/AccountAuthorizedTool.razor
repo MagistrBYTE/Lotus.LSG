@@ -1,0 +1,54 @@
+﻿
+@using System.Security.Claims;
+@using Lotus.Web;
+@using Lotus.Web.Account;
+
+@inject NavigationManager navigationManager
+@inject CIdentityAuthenticationStateProvider authStateProvider
+
+<div class="alert-info alert_account" role="banner">
+    <div class="panel_account">
+        <div class="panel_left">
+            <span class="badge badge-primary badge_account">Пользователь</span>
+            <span class="badge badge-light badge_account">@AuthenticationState.Result.User.Identity.Name</span>
+
+            <span class="badge badge-primary badge_account">Роль</span>
+            <span class="badge badge-light badge_account">@GetRoleUser().Result</span>
+        </div>
+        <div class="panel_right">
+            <button class="btn btn-primary m-1" @onclick="OnLogoutClick">Выйти</button>
+        </div>
+    </div>
+</div>
+
+@code
+{
+    [CascadingParameter]
+    Task<AuthenticationState> AuthenticationState { get; set; }
+
+    public async Task<String> GetRoleUser()
+    {
+        ClaimsPrincipal principal = (await AuthenticationState).User;
+
+        if (principal.Identity.IsAuthenticated)
+        {
+            Claim claim = principal.FindFirst((Claim claim) =>
+            {
+                return (claim.Type == ClaimTypes.Role);
+            });
+
+            if (claim != null)
+            {
+                return (claim.Value);
+            }
+        }
+
+        return ("");
+    }
+
+    async Task OnLogoutClick()
+    {
+        await authStateProvider.Logout();
+        navigationManager.NavigateTo("");
+    }
+}

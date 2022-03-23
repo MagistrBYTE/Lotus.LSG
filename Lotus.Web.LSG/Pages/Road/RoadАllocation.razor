@@ -1,0 +1,216 @@
+﻿@page "/Road/Аllocation"
+
+
+@layout Road
+
+@inject CRepositoryDatabase RepositoryDatabase;
+
+@if (Activities == null)
+{
+    <div style="position:relative; width:100%; text-align:center">
+        <h2>Распределение средств дорожного фонда</h2>
+        <p><i class="fas fa-spinner fa-spin"></i>  Идет загрузка данных...</p>
+    </div>
+}
+else
+{
+    <div class=".container-fluid">
+        <div class="row m-1">
+            <div class="col">
+                <h3><span class="badge badge-info">Распределение средств дорожного фонда</span></h3>
+                <table class=".table-sm table-bordered" width="100%">
+                    <thead>
+                        <tr class="text-center" style="font-size:small; height:36px">
+                            <th rowspan="2" width="19%">Наименование</th>
+                            <th scope="col" colspan="3">Развитие и совершенствование сети автомобильных дорог </th>
+                            <th scope="col" colspan="3">Безопасность дорожного движения</th>
+                            <th scope="col" colspan="3">По программе в целом</th>
+                        </tr>
+                        <tr class="text-center" style="font-size:small; height:36px">
+                            <th scope="col" width="9%">Местный бюджет</th>
+                            <th scope="col" width="9%">Областной бюджет</th>
+                            <th scope="col" width="9%">Всего</th>
+                            <th scope="col" width="9%">Местный бюджет</th>
+                            <th scope="col" width="9%">Областной бюджет</th>
+                            <th scope="col" width="9%">Всего</th>
+                            <th scope="col" width="9%">Местный бюджет</th>
+                            <th scope="col" width="9%">Областной бюджет</th>
+                            <th scope="col" width="9%">Всего</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (Int32 i = 0; i < CPublicAuthority.DistrictAuthorities.Length; i++)
+                        {
+                            <tr>
+                                <th scope="col" class="text-left" style="font-size:small; height:36px">
+                                    @CPublicAuthority.DistrictAuthorities[i].ShortName
+                                </th>
+
+                                <th scope="col" class="text-center" style="font-size:small; font-style:normal;">
+                                    @{
+                                        Decimal value = Activities.GetAppropriationsForSubProgram(
+                                            XMunicipalSubProgramData.ROAD_REPAIRS_Id,
+                                            CPublicAuthority.DistrictAuthorities[i].Id,
+                                            2021,
+                                            TBudgetFinancing.Local);
+                                        String text = XPriceFormat.ToString(value);
+                                        <span>@text</span>
+                                    }
+                                </th>
+
+                                <th scope="col" class="text-center" style="font-size:small; font-style:normal;">
+                                    @{
+                                        value = Activities.GetAppropriationsForSubProgram(
+                                            XMunicipalSubProgramData.ROAD_REPAIRS_Id,
+                                            CPublicAuthority.DistrictAuthorities[i].Id,
+                                            2021,
+                                            TBudgetFinancing.Regional);
+                                        text = XPriceFormat.ToString(value);
+                                        <span>@text</span>
+                                    }
+                                </th>
+
+                                <th scope="col" class="text-center" style="font-size:small; font-style:normal;">
+                                    @{
+                                        value = Activities.GetAppropriationsForSubProgram(
+                                            XMunicipalSubProgramData.ROAD_REPAIRS_Id,
+                                            CPublicAuthority.DistrictAuthorities[i].Id,
+                                            2021,
+                                            TBudgetFinancing.Common);
+                                        text = XPriceFormat.ToString(value);
+                                        <span>@text</span>
+                                    }
+                                </th>
+
+                                <th scope="col" class="text-center" style="font-size:small; font-style:normal;">
+                                    @{
+                                        value = Activities.GetAppropriationsForSubProgram(
+                                            XMunicipalSubProgramData.ROAD_SECURITY_Id,
+                                            CPublicAuthority.DistrictAuthorities[i].Id,
+                                            2021,
+                                            TBudgetFinancing.Local);
+                                        text = XPriceFormat.ToString(value);
+                                        <span>@text</span>
+                                    }
+                                </th>
+
+                                <th scope="col" class="text-center" style="font-size:small; font-style:normal;">
+                                    @{
+                                        value = Activities.GetAppropriationsForSubProgram(
+                                            XMunicipalSubProgramData.ROAD_SECURITY_Id,
+                                            CPublicAuthority.DistrictAuthorities[i].Id,
+                                            2021,
+                                            TBudgetFinancing.Regional);
+                                        text = XPriceFormat.ToString(value);
+                                        <span>@text</span>
+                                    }
+                                </th>
+
+                                <th scope="col" class="text-center" style="font-size:small; font-style:normal;">
+                                    @{
+                                        value = Activities.GetAppropriationsForSubProgram(
+                                            XMunicipalSubProgramData.ROAD_SECURITY_Id,
+                                            CPublicAuthority.DistrictAuthorities[i].Id,
+                                            2021,
+                                            TBudgetFinancing.Common);
+                                        text = XPriceFormat.ToString(value);
+                                        <span>@text</span>
+                                    }
+                                </th>
+
+                                <th scope="col" class="text-center" style="font-size:small; font-style:normal;">
+                                    @{
+                                        value = Activities.GetAppropriationsForProgram(
+                                            XMunicipalProgramData.ROAD_Id,
+                                            CPublicAuthority.DistrictAuthorities[i].Id,
+                                            2021,
+                                            TBudgetFinancing.Local);
+                                        text = XPriceFormat.ToString(value);
+                                        <span>@text</span>
+                                    }
+                                </th>
+
+                                <th scope="col" class="text-center" style="font-size:small; font-style:normal;">
+                                    @{
+                                        value = Activities.GetAppropriationsForProgram(
+                                            XMunicipalProgramData.ROAD_Id,
+                                            CPublicAuthority.DistrictAuthorities[i].Id,
+                                            2021,
+                                            TBudgetFinancing.Regional);
+                                        text = XPriceFormat.ToString(value);
+                                        <span>@text</span>
+                                    }
+                                </th>
+
+                                <th scope="col" class="text-center" style="font-size:small; font-style:normal;">
+                                    @{
+                                        value = Activities.GetAppropriationsForProgram(
+                                            XMunicipalProgramData.ROAD_Id,
+                                            CPublicAuthority.DistrictAuthorities[i].Id,
+                                            2021,
+                                            TBudgetFinancing.Common);
+                                        text = XPriceFormat.ToString(value);
+                                        <span>@text</span>
+                                    }
+                                </th>
+
+                            </tr>
+                         }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row m-1">
+            <div class="col">
+                <h3><span class="badge badge-info">Основные операции</span></h3>
+            </div>
+        </div>
+    </div>
+}
+@code
+{
+    //
+    // СВОЙСТВА
+    //
+    /// <summary>
+    /// Статус авторизации пользователя
+    /// </summary>
+    [CascadingParameter]
+    Task<AuthenticationState> AuthenticationState { get; set; }
+
+    /// <summary>
+    /// Список мероприятий дорожной деятельности
+    /// </summary>
+    List<CMunicipalProgramActivity> Activities { get; set; }
+
+    //
+    // МЕТОДЫ КОМПОНЕНТА
+    //
+    /// <summary>
+    ///
+    /// </summary>
+    /// <returns></returns>
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdateViewActivity();
+    }
+
+    //
+    // МЕТОДЫ РАБОТЫ С МЕРОПРИЯТИЯМИ
+    //
+    /// <summary>
+    /// Обновляем представление
+    /// </summary>
+    /// <returns></returns>
+    private async Task UpdateViewActivity()
+    {
+        Activities = await RepositoryDatabase.MunicipalActivities
+            .Include(activity => activity.Program) // подгружаем данные по программам
+            .Include(activity => activity.SubProgram) // подгружаем данные по попрограммам
+            .Include(activity => activity.Contracts) // подгружаем данные по этапам мероприятий
+            .Include(activity => activity.Activities) // подгружаем данные по контрактам
+            .Include(activity => activity.Executor) // подгружаем данные по ответственному исполнителю
+            .OrderBy(activity => activity.Number)
+            .ToListAsync();
+    }
+}

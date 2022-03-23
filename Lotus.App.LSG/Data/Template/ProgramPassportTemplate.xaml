@@ -1,0 +1,443 @@
+﻿<FlowDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              ColumnWidth="400" FontSize="14" FontFamily="Times New Roman">
+	<FlowDocument.Resources>
+		<Style TargetType="TableCell">
+			<Setter Property="BorderThickness" Value="0.5"/>
+			<Setter Property="BorderBrush" Value="Black"/>
+			<Setter Property="Padding" Value="5"/>
+		</Style>
+	</FlowDocument.Resources>
+	<Table>
+		<Table.Columns>
+			<TableColumn Width="300" />
+			<TableColumn/>
+		</Table.Columns>
+		<TableRowGroup>
+			<TableRow>
+				<TableCell>
+					<Paragraph>Ответственный исполнитель программы</Paragraph>
+				</TableCell>
+				<TableCell>
+					<Paragraph>
+						Отдел капитального строительства и проектирования Администрации Брединского муниципального района
+					</Paragraph>
+					<Paragraph>
+						Отдел ЖКХ И СГ Администрации Брединского муниципального района
+					</Paragraph>
+				</TableCell>
+			</TableRow>
+			
+			<TableRow>
+				<TableCell>
+					<Paragraph>Соисполнители муниципальной программы</Paragraph>
+				</TableCell>
+				<TableCell>
+					<Paragraph>
+						Администрации сельских поселений (по согласованию)
+					</Paragraph>
+					<Paragraph>
+						Отдел МВД России по Брединскому району
+					</Paragraph>
+				</TableCell>
+			</TableRow>
+
+			<TableRow>
+				<TableCell>
+					<Paragraph>Подпрограммы муниципальной программы</Paragraph>
+				</TableCell>
+				<TableCell>
+					<Paragraph>
+						«Развитие и совершенствование сети автомобильных дорог общего пользования в Брединском муниципальном районе»
+					</Paragraph>
+					<Paragraph>
+						«Безопасность дорожного движения в Брединском муниципальном районе»
+					</Paragraph>
+				</TableCell>
+			</TableRow>
+
+			<!--Основные цели-->
+			<TableRow>
+				<TableCell>
+					<Paragraph>Основные цели муниципальной программы</Paragraph>
+				</TableCell>
+				<TableCell>
+					<List>
+						<ListItem>
+							<Paragraph>развитие сети автомобильных дорог общего пользования в Брединском районе;</Paragraph>
+						</ListItem>
+						<ListItem>
+							<Paragraph>обеспечение качества, доступности и конкурентоспособности транспортных услуг 
+								для населения и хозяйствующих субъектов;
+							</Paragraph>
+						</ListItem>
+						<ListItem>
+							<Paragraph>создание условий для обеспечения охраны жизни и здоровья граждан, 
+								их законных прав на безопасные условия движения на автомобильных дорогах;
+							</Paragraph>
+						</ListItem>
+					</List>
+				</TableCell>
+			</TableRow>
+
+			<!--Целевые индикаторы и показатели-->
+			<TableRow>
+				<TableCell>
+					<Paragraph>Целевые индикаторы и показатели муниципальной программы</Paragraph>
+				</TableCell>
+				<TableCell>
+					<List>
+						<ListItem>
+							<Paragraph>прирост протяженности автомобильных дорог общего пользования местного значения
+								соответствующих нормативным требованиям к транспортно-эксплуатационным показателям, 
+								в результате капитального ремонта и ремонта автомобильных дорог, км;</Paragraph>
+						</ListItem>
+						<ListItem>
+							<Paragraph>ликвидация дефектов дорожного покрытия в рамках осуществления работ по ремонту и 
+								содержанию автомобильных дорог и (или) улично-дорожной сети, тыс. м2;
+							</Paragraph>
+						</ListItem>
+						<ListItem>
+							<Paragraph>
+								комплексное обустройство пешеходных переходов, шт;
+							</Paragraph>
+						</ListItem>
+						<ListItem>
+							<Paragraph>
+								установка дорожных знаков в соответствии с проектами организации дорожного движения, шт;
+							</Paragraph>
+						</ListItem>
+						<ListItem>
+							<Paragraph>
+								установка искусственных неровностей, шт.
+							</Paragraph>
+						</ListItem>
+					</List>
+				</TableCell>
+			</TableRow>
+
+			<!--Этапы и сроки-->
+			<TableRow>
+				<TableCell>
+					<Paragraph>Этапы и сроки реализации муниципальной программы</Paragraph>
+				</TableCell>
+				<TableCell>
+					<Paragraph>
+						1 этап – 2020-2022 годы
+					</Paragraph>
+					<Paragraph>
+						2 этап – 2023-2025 годы
+					</Paragraph>
+				</TableCell>
+			</TableRow>
+
+			<!--Объемы бюджетных ассигнований-->
+			<TableRow>
+				<TableCell>
+					<Paragraph>Объемы бюджетных ассигнований муниципальной программы</Paragraph>
+				</TableCell>
+				<TableCell>
+					<Paragraph TextAlignment="Justify" TextIndent="20">
+						Общая сумма бюджетных средств, необходимых для реализации программных мероприятий, 
+						составляет
+						<Run Name="runTotal" FontWeight="Bold"/> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="20">
+						местный бюджет:
+						<Run Name="runTotalLocal" FontWeight="Bold"/> тыс. руб. 
+					</Paragraph>
+					<Paragraph TextIndent="20">
+						областной бюджет:
+						<Run Name="runTotalRegional" FontWeight="Bold"/> тыс. руб.,
+					</Paragraph>
+					<Paragraph TextIndent="20">В том числе по годам реализации:</Paragraph>
+
+					<!--2020 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2020 г" FontWeight="Bold"/>, всего
+						<Run Name="run2020" FontWeight="Bold" /> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="run2020Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="run2020Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2021 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2021 г" FontWeight="Bold"/>, всего
+						<Run Name="run2021" FontWeight="Bold" /> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="run2021Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="run2021Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2022 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2022 г" FontWeight="Bold"/>, всего
+						<Run Name="run2022" FontWeight="Bold" /> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="run2022Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="run2022Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2023 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2023 г" FontWeight="Bold"/>, всего
+						<Run Name="run2023" FontWeight="Bold"/> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="run2023Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="run2023Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2024 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2024 г" FontWeight="Bold"/>, всего
+						<Run Name="run2024" FontWeight="Bold"/> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="run2024Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="run2024Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2025 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2025 г" FontWeight="Bold"/>, всего
+						<Run Name="run2025" FontWeight="Bold"/> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="run2025Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="run2025Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<Paragraph TextIndent="20">В том числе по подпрограммам:</Paragraph>
+					
+					<Paragraph TextIndent="20">По подпрограмме «Развитие и совершенствование сети автомобильных
+						дорог общего пользования в Брединском муниципальном районе» объем бюджетных ассигнований 
+						на реализацию подпрограммы в 2020-2025 годах составляет
+						<Run Name="runRepairs" FontWeight="Bold"/> тыс. руб., в том числе:</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runRepairsLocal" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runRepairsRegional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<Paragraph TextIndent="20">В том числе по годам реализации:</Paragraph>
+
+					<!--2020 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2020 г" FontWeight="Bold"/>, всего
+						<Run Name="runRepairs2020" FontWeight="Bold" /> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runRepairs2020Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runRepairs2020Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2021 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2021 г" FontWeight="Bold"/>, всего
+						<Run Name="runRepairs2021" FontWeight="Bold" /> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runRepairs2021Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runRepairs2021Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2022 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2022 г" FontWeight="Bold"/>, всего
+						<Run Name="runRepairs2022" FontWeight="Bold" /> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runRepairs2022Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runRepairs2022Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2023 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2023 г" FontWeight="Bold"/>, всего
+						<Run Name="runRepairs2023" FontWeight="Bold"/> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runRepairs2023Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runRepairs2023Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2024 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2024 г" FontWeight="Bold"/>, всего
+						<Run Name="runRepairs2024" FontWeight="Bold"/> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runRepairs2024Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runRepairs2024Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2025 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2025 г" FontWeight="Bold"/>, всего
+						<Run Name="runRepairs2025" FontWeight="Bold"/> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runRepairs2025Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runRepairs2025Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<Paragraph TextIndent="20">По подпрограмме «Безопасность дорожного движения в Брединском муниципальном районе» объем бюджетных ассигнований на реализацию подпрограммы в 2020-2025 годах составляет
+						<Run Name="runSecurity" FontWeight="Bold"/> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runSecurityLocal" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runSecurityRegional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<Paragraph TextIndent="20">В том числе по годам реализации:</Paragraph>
+
+					<!--2020 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2020 г" FontWeight="Bold"/>, всего
+						<Run Name="runSecurity2020" FontWeight="Bold" /> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runSecurity2020Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runSecurity2020Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2021 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2021 г" FontWeight="Bold"/>, всего
+						<Run Name="runSecurity2021" FontWeight="Bold" /> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runSecurity2021Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runSecurity2021Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2022 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2022 г" FontWeight="Bold"/>, всего
+						<Run Name="runSecurity2022" FontWeight="Bold" /> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runSecurity2022Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runSecurity2022Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2023 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2023 г" FontWeight="Bold"/>, всего
+						<Run Name="runSecurity2023" FontWeight="Bold"/> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runSecurity2023Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runSecurity2023Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2024 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2024 г" FontWeight="Bold"/>, всего
+						<Run Name="runSecurity2024" FontWeight="Bold"/> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runSecurity2024Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runSecurity2024Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+					<!--2025 г-->
+					<Paragraph TextIndent="20">
+						<Run Text="2025 г" FontWeight="Bold"/>, всего
+						<Run Name="runSecurity2025" FontWeight="Bold"/> тыс. руб., в том числе:
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						местный бюджет
+						<Run Name="runSecurity2025Local" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+					<Paragraph TextIndent="40">
+						областной бюджет
+						<Run Name="runSecurity2025Regional" FontWeight="Bold"/> тыс. руб.
+					</Paragraph>
+
+				</TableCell>
+			</TableRow>
+
+
+		</TableRowGroup>
+	</Table>
+</FlowDocument>

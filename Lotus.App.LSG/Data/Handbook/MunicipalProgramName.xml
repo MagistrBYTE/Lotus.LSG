@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <Repository Identifier="MunicipalProgramName" Name="Наименование муниципальных программ" ID="0">
+    <Scheme>
+      <Column Name="ID" DataTypeCode="Int32" Caption="Код"/>
+      <Column Name="ShortName" DataTypeCode="String" Caption="Краткое наименование" IsMainColumn="True"/>
+      <Column Name="FullName" DataTypeCode="String" Caption="Полное наименование"/>
+    </Scheme>
+    <Record ID="0" Identifier="Road" ShortName="Дороги" FullName="Развитие дорожного хозяйства в Брединском муниципальном районе"/>
+    <Record ID="1" Identifier="Housing" ShortName="ДКЖ" FullName="«Обеспечение доступным и комфортным жильем граждан Российской Федерации» в Брединском муниципальном районе на 2014-2020 годы" />
+  </Repository>

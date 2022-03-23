@@ -1,0 +1,35 @@
+{
+	"iisSettings":
+	{
+		"windowsAuthentication": false,
+		"anonymousAuthentication": true,
+		"iisExpress":
+		{
+			"applicationUrl": "http://localhost:39992",
+			"sslPort": 44380
+		}
+	},
+	"profiles":
+	{
+		"Lotus.Web.LSG":
+		{
+			"commandName": "Project",
+			"dotnetRunMessages": true,
+			"launchBrowser": true,
+			"applicationUrl": "http://localhost:39992",
+			"environmentVariables":
+			{
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			}
+		},
+		"IIS Express":
+		{
+			"commandName": "IISExpress",
+			"launchBrowser": true,
+			"environmentVariables":
+			{
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			}
+		}
+	}
+}

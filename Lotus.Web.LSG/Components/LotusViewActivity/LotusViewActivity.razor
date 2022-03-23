@@ -1,0 +1,171 @@
+﻿@namespace Lotus.Web.Components
+
+@inherits LotusViewActivityClass
+
+@using Lotus.Core;
+@using Lotus.Web;
+@using Lotus.Web.Components;
+@using Lotus.LSG;
+
+@if (Activities != null)
+{
+    Decimal[] total_local = new Decimal[6];
+    Decimal[] total_regional = new Decimal[6];
+
+    for (Int32 i = 0; i < Activities.Count; i++)
+    {
+        CMunicipalProgramActivity activity = Activities[i];
+        if (activity.NotCalculation == false && activity.IndicatorId == IndicatorId && mProcessingActivities[i] == false)
+        {
+            // Если есть областной бюджет
+            @if (activity.PriceLocal > 0)
+            {
+                // Местный бюджет
+                <tr class="text-center" style="font-size:small; height:36px">
+                    <td scope="col" rowspan="2">@(i + 1)</td>
+                    <td scope="col" rowspan="2" align="left">@activity.Name</td>
+                    <td scope="col" rowspan="2">@activity.ExecutorShortName</td>
+                    <td scope="col">Местный бюджет</td>
+                    @for (Int32 y = 2020; y <= 2025; y++)
+                    {
+                        Int32 index = -1;
+                        CMunicipalProgramActivity activity_year = Activities.Find(activity.Name, y, activity.ExecutorId, IndicatorId, out index);
+                        if (activity_year != null)
+                        {
+                            mProcessingActivities[index] = true;
+
+                            if (y <= YearToFinance)
+                            {
+                                <td scope="col">@((activity_year.PriceLocal / 1000).ToString("F3"))</td>
+                                total_local[y - 2020] += (activity_year.PriceLocal / 1000);
+                            }
+                            else
+                            {
+                                <td scope="col"></td>
+                            }
+                        }
+                        else
+                        {
+                            <td scope="col"></td>
+                        }
+                    }
+                </tr>
+
+                // Областной бюджет
+                <tr class="text-center" style="font-size:small; height:36px">
+                    <td scope="col">Областной бюджет</td>
+                    @for (Int32 y = 2020; y <= 2025; y++)
+                    {
+                        Int32 index = -1;
+                        CMunicipalProgramActivity activity_year = Activities.Find(activity.Name, y, activity.ExecutorId, IndicatorId, out index);
+                        if (activity_year != null)
+                        {
+                            mProcessingActivities[index] = true;
+
+                            if (y <= YearToFinance)
+                            {
+                                <td scope="col">@((activity_year.PriceRegional / 1000).ToString("F3"))</td>
+                                total_regional[y - 2020] += (activity_year.PriceRegional / 1000);
+                            }
+                            else
+                            {
+                                <td scope="col"></td>
+                            }
+                        }
+                        else
+                        {
+                            <td scope="col"></td>
+                        }
+                    }
+                </tr>
+            }
+            else
+            {
+                <tr class="text-center" style="font-size:small; height:36px">
+                    <td scope="col">@(i + 1)</td>
+                    <td scope="col" align="left">@activity.Name</td>
+                    <td scope="col">@activity.ExecutorShortName</td>
+                    <td scope="col">Местный бюджет</td>
+                    @for (Int32 y = 2020; y <= 2025; y++)
+                    {
+                        Int32 index = -1;
+                        CMunicipalProgramActivity activity_year = Activities.Find(activity.Name, y, activity.ExecutorId, IndicatorId, out index);
+                        if (activity_year != null)
+                        {
+                            mProcessingActivities[index] = true;
+
+                            if (y <= YearToFinance)
+                            {
+                                <td scope="col">@((activity_year.PriceLocal / 1000).ToString("F3"))</td>
+                                total_local[y - 2020] += (activity_year.PriceLocal / 1000);
+                            }
+                            else
+                            {
+                                <td scope="col"></td>
+                            }
+                        }
+                        else
+                        {
+                            <td scope="col"></td>
+                        }
+                    }
+                </tr>
+            }
+        }
+    }
+
+    if (total_regional[0] > 0 || total_regional[1] > 0 || total_regional[2] > 0)
+    {
+        <tr class="text-center" style="font-size:small; height:36px">
+            <td scope="col" rowspan="2"></td>
+            <td scope="col" rowspan="2" align="left" style="font-weight:bold">ИТОГО</td>
+            <td scope="col" rowspan="2"></td>
+            <td scope="col">Местный бюджет</td>
+            @for (Int32 til = 0; til < total_local.Length; til++)
+            {
+                if (total_local[til] > 0)
+                {
+                    <td scope="col" style="font-weight:bold">@(total_local[til].ToString("F3"))</td>
+                }
+                else
+                {
+                    <td scope="col"></td>
+                }
+            }
+        </tr>
+        <tr class="text-center" style="font-size:small; height:36px">
+            <td scope="col">Областной бюджет</td>
+            @for (Int32 tir = 0; tir < total_regional.Length; tir++)
+            {
+                if (total_local[tir] > 0)
+                {
+                    <td scope="col" style="font-weight:bold">@(total_regional[tir].ToString("F3"))</td>
+                }
+                else
+                {
+                    <td scope="col"></td>
+                }
+            }
+        </tr>
+    }
+    else
+    {
+        <tr class="text-center" style="font-size:small; height:36px">
+            <td scope="col"></td>
+            <td scope="col" align="left" style="font-weight:bold">ИТОГО</td>
+            <td scope="col"></td>
+            <td scope="col">Местный бюджет</td>
+            @for (Int32 il = 0; il < total_local.Length; il++)
+            {
+                if (total_local[il] > 0)
+                {
+                    <td scope="col" style="font-weight:bold">@(total_local[il].ToString("F3"))</td>
+                }
+                else
+                {
+                    <td scope="col"></td>
+                }
+            }
+        </tr>
+    }
+}

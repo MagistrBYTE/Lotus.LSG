@@ -1,0 +1,194 @@
+﻿@page "/Handbook/SubjectEntities"
+
+@layout Handbook
+
+@inject CRepositoryDatabase RepositoryDatabase;
+
+@if (SubjectEntities == null)
+{
+    <div style="position:relative; width:100%; text-align:center">
+        <h2>Юридические лица</h2>
+        <p><i class="fas fa-spinner fa-spin"></i>  Идет загрузка данных...</p>
+    </div>
+}
+else
+{
+    <DataGrid TItem="CLegalEntity" Data="@SubjectEntities"
+              Bordered="true"
+              EditMode="DataGridEditMode.Inline"
+              Editable="AuthenticationState.Result.User.Identity.IsAuthenticated"
+              RowInserted="@AddLegalEntity"
+              RowUpdated="@UpdateLegalEntity"
+              RowRemoved="@DeleleLegalEntity"
+              Resizable="true"
+              PageSize="12"
+              ResizeMode="TableResizeMode.Header">
+
+        <DataGridCommandColumn TItem="CLegalEntity" />
+        <DataGridColumn TItem="CLegalEntity" Field="@nameof(CLegalEntity.Id)" Caption="ИД" Sortable="true" Editable="false" />
+        <DataGridColumn TItem="CLegalEntity" Field="@nameof(CLegalEntity.Name)" Caption="Полное имя" Sortable="true" Editable="true" />
+        <DataGridColumn TItem="CLegalEntity" Field="@nameof(CLegalEntity.ShortName)" Caption="Краткое имя" Sortable="true" Editable="true" />
+
+        <DataGridSelectColumn TItem="CLegalEntity" Field="@nameof(CLegalEntity.EntityType)" Caption="Форма" Sortable="true" Editable="true">
+            <DisplayTemplate>
+                @{
+                    CLegalEntity currently_edited = context as CLegalEntity;
+                    String status = currently_edited.EntityType.GetDescriptionOrName();
+                    <text>@status</text>
+                }
+            </DisplayTemplate>
+            <EditTemplate>
+                @{
+                    <Select TValue="TLegalEntityType" SelectedValue="@((TLegalEntityType)(context.CellValue))"
+                     SelectedValueChanged="@((v) => { context.UpdateCell(nameof(CLegalEntity.EntityType), v);})">
+                        @foreach (var item in CLegalEntityTypeModel.Data)
+                        {
+                            <SelectItem TValue="TLegalEntityType" Value="@(item.Value)">@item.Desc</SelectItem>
+                        }
+                    </Select>
+                }
+            </EditTemplate>
+        </DataGridSelectColumn>
+
+        <DataGridSelectColumn TItem="CLegalEntity" Field="@nameof(CLegalEntity.EntityOwnership)" Caption="Собственность" Sortable="true" Editable="true">
+            <DisplayTemplate>
+                @{
+                    CLegalEntity currently_edited = context as CLegalEntity;
+                    String status = currently_edited.EntityOwnership.GetDescriptionOrName();
+                    <text>@status</text>
+                }
+            </DisplayTemplate>
+            <EditTemplate>
+                @{
+                    <Select TValue="TLegalEntityOwnership" SelectedValue="@((TLegalEntityOwnership)(context.CellValue))"
+                     SelectedValueChanged="@((v) => { context.UpdateCell(nameof(CLegalEntity.EntityOwnership), v);})">
+                        @foreach (var item in CLegalEntityOwnershipModel.Data)
+                        {
+                            <SelectItem TValue="TLegalEntityOwnership" Value="@(item.Value)">@item.Desc</SelectItem>
+                        }
+                    </Select>
+                }
+            </EditTemplate>
+        </DataGridSelectColumn>
+
+        <DataGridColumn TItem="CLegalEntity" Field="@nameof(CLegalEntity.INN)" Caption="ИНН" Sortable="true" Editable="true" />
+        <DataGridColumn TItem="CLegalEntity" Field="@nameof(CLegalEntity.OGRN)" Caption="ОГРН" Sortable="true" Editable="true" />
+
+    </DataGrid>
+}
+
+@code
+{
+    //
+    // СВОЙСТВА
+    //
+    /// <summary>
+    /// Статус авторизации пользователя
+    /// </summary>
+    [CascadingParameter]
+    Task<AuthenticationState> AuthenticationState { get; set; }
+
+    /// <summary>
+    /// Список юридических лиц
+    ///</summary>
+    List<CLegalEntity> SubjectEntities { get; set; }
+
+    //
+    // МЕТОДЫ КОМПОНЕНТА
+    //
+    protected override async Task OnInitializedAsync()
+    {
+        SubjectEntities = await RepositoryDatabase.SubjectEntities.ToListAsync();
+    }
+
+    //
+    // ОБЩИЕ МЕТОДЫ
+    //
+    /// <summary>
+    /// Обновления представления
+    /// </summary>
+    /// <returns></returns>
+    private async Task UpdateView()
+    {
+        SubjectEntities = await RepositoryDatabase.SubjectEntities.ToListAsync();
+    }
+
+    /// <summary>
+    /// Добавления нового юридического лица
+    ///</summary>
+    /// <returns></returns>
+    private async Task AddLegalEntity(SavedRowItem<CLegalEntity, Dictionary<String, Object>> row)
+    {
+        CLegalEntity legal_entity = row.Item;
+
+        // Добавляем и обновляем базу данных
+        RepositoryDatabase.SubjectEntities.Add(legal_entity);
+        await RepositoryDatabase.SaveChangesAsync();
+
+        // Обновляем представление
+        //await UpdateView();
+    }
+
+    /// <summary>
+    /// Обновление данных юридического лица
+    ///</summary>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    private async Task UpdateLegalEntity(SavedRowItem<CLegalEntity, Dictionary<String, Object>> row)
+	{
+        CLegalEntity edit_item = row.Item;
+        if (edit_item != null)
+        {
+            foreach(var props in row.Values)
+            {
+                if(props.Key == nameof(CLegalEntity.Name))
+                {
+                    edit_item.Name = (String)props.Value;
+                }
+                if(props.Key == nameof(CLegalEntity.ShortName))
+                {
+                    edit_item.ShortName = (String)props.Value;
+                }
+                if(props.Key == nameof(CLegalEntity.EntityOwnership))
+                {
+                    edit_item.EntityOwnership = (TLegalEntityOwnership)props.Value;
+                }
+                if(props.Key == nameof(CLegalEntity.EntityType))
+                {
+                    edit_item.EntityType = (TLegalEntityType)props.Value;
+                }
+                if(props.Key == nameof(CLegalEntity.INN))
+                {
+                    edit_item.INN = (String)props.Value;
+                }
+                if(props.Key == nameof(CLegalEntity.OGRN))
+                {
+                    edit_item.OGRN = (String)props.Value;
+                }
+                if(props.Key == nameof(CLegalEntity.KPP))
+                {
+                    edit_item.KPP = (String)props.Value;
+                }
+            }
+
+            // Обновляем базу данных
+            RepositoryDatabase.SubjectEntities.Update(edit_item);
+            await RepositoryDatabase.SaveChangesAsync();
+        }
+	}
+
+	/// <summary>
+	/// Удаление юридического лица
+	/// </summary>
+	/// <param name="args"></param>
+	/// <returns></returns>
+	private async Task DeleleLegalEntity(CLegalEntity legal_entity)
+	{
+		// Удаляем с базы данных
+		RepositoryDatabase.SubjectEntities.Remove(legal_entity);
+		await RepositoryDatabase.SaveChangesAsync();
+
+		// Обновляем представление
+		//await UpdateView();
+	}
+}

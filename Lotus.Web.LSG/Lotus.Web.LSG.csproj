@@ -1,0 +1,86 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Configurations>Debug;Release</Configurations>
+    <OutputPath>..\Output\$(Configuration)\</OutputPath>
+    <NoWarn>$(NoWarn);8618</NoWarn>
+    <NoWarn>$(NoWarn);8767</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;USE_EFC</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;USE_EFC</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Components\LotusViewActivity\LotusViewActivity.razor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Components\LotusViewActivity\LotusViewActivity.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Lotus.LSG\Source\Base\Address\LotusLSGBaseAddress.cs" Link="Source\Base\Address\LotusLSGBaseAddress.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Address\LotusLSGBaseAddressStreet.cs" Link="Source\Base\Address\LotusLSGBaseAddressStreet.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Address\LotusLSGBaseAddressVillage.cs" Link="Source\Base\Address\LotusLSGBaseAddressVillage.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Address\LotusLSGBaseAddressVillageSettlement.cs" Link="Source\Base\Address\LotusLSGBaseAddressVillageSettlement.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\CertificateCompletion\LotusLSGCertificateCompletion.cs" Link="Source\Base\CertificateCompletion\LotusLSGCertificateCompletion.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Common\LotusLSGBaseCommon.cs" Link="Source\Base\Common\LotusLSGBaseCommon.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Contract\LotusLSGContract.cs" Link="Source\Base\Contract\LotusLSGContract.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Contract\LotusLSGContractCommon.cs" Link="Source\Base\Contract\LotusLSGContractCommon.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Contract\LotusLSGContractSet.cs" Link="Source\Base\Contract\LotusLSGContractSet.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Financing\LotusLSGBaseFinancingBudget.cs" Link="Source\Base\Financing\LotusLSGBaseFinancingBudget.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\Financing\LotusLSGBaseFinancingPrice.cs" Link="Source\Base\Financing\LotusLSGBaseFinancingPrice.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\MunicipalProgram\LotusLSGMunicipalProgram.cs" Link="Source\Base\MunicipalProgram\LotusLSGMunicipalProgram.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\MunicipalProgram\LotusLSGMunicipalProgramActivity.cs" Link="Source\Base\MunicipalProgram\LotusLSGMunicipalProgramActivity.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\MunicipalProgram\LotusLSGMunicipalProgramCommon.cs" Link="Source\Base\MunicipalProgram\LotusLSGMunicipalProgramCommon.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\MunicipalProgram\LotusLSGMunicipalProgramIndicator.cs" Link="Source\Base\MunicipalProgram\LotusLSGMunicipalProgramIndicator.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\MunicipalProgram\LotusLSGMunicipalProgramSub.cs" Link="Source\Base\MunicipalProgram\LotusLSGMunicipalProgramSub.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\SubjectCivil\LotusLSGSubjectCivilBase.cs" Link="Source\Base\SubjectCivil\LotusLSGSubjectCivilBase.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\SubjectCivil\LotusLSGSubjectCivilCommon.cs" Link="Source\Base\SubjectCivil\LotusLSGSubjectCivilCommon.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\SubjectCivil\LotusLSGSubjectCivilIndividual.cs" Link="Source\Base\SubjectCivil\LotusLSGSubjectCivilIndividual.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\SubjectCivil\LotusLSGSubjectCivilLegalEntity.cs" Link="Source\Base\SubjectCivil\LotusLSGSubjectCivilLegalEntity.cs" />
+    <Compile Include="..\Lotus.LSG\Source\Base\SubjectCivil\LotusLSGSubjectCivilPublicAuthority.cs" Link="Source\Base\SubjectCivil\LotusLSGSubjectCivilPublicAuthority.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazorise" Version="0.9.5.5" />
+    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.5.5" />
+    <PackageReference Include="Blazorise.Components" Version="0.9.5.5" />
+    <PackageReference Include="Blazorise.DataGrid" Version="0.9.5.5" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.5.5" />
+    <PackageReference Include="Blazorise.TreeView" Version="0.9.5.5" />
+    <PackageReference Include="Lotus.Core" Version="1.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.3" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\LotusViewActivity\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Source\Base\Address\" />
+    <Folder Include="Source\Base\Contract\" />
+    <Folder Include="Source\Base\SubjectCivil\" />
+    <Folder Include="Source\Base\CertificateCompletion\" />
+    <Folder Include="Source\Base\Financing\" />
+    <Folder Include="Source\Base\Common\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\LotusMunlndicatorTargetValues\LotusMunlndicatorTargetValues.razor" />
+  </ItemGroup>
+
+</Project>

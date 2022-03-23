@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:lsg="clr-namespace:Lotus.LSG"
+					xmlns:core="http://schemas.cubex.core"
+					xmlns:cntl="http://schemas.cubex.controls">
+
+	<!--СТИЛИ-->
+	<!--Стиль элемента который не учитывается-->
+	<Style x:Key="NotCalculationStyleKey" TargetType="TreeViewItem">
+		<Setter Property="Background" Value="LightCoral"/>
+		<Setter Property="FontStyle" Value="Italic"/>
+	</Style>
+
+	<!--Стиль для отображения элемента который верифицирован-->
+	<Style x:Key="VerifiedStyleKey" TargetType="TreeViewItem">
+		<Setter Property="Background" Value="LightCoral"/>
+		<Setter Property="FontStyle" Value="Italic"/>
+	</Style>
+
+	<!--Стиль для отображения элемента который отображается-->
+	<Style x:Key="PresentedStyleKey" TargetType="TreeViewItem">
+		<Setter Property="Background" Value="LightCoral"/>
+		<Setter Property="FontStyle" Value="Italic"/>
+	</Style>
+
+	<!--Селектор стиля-->
+	<lsg:CMunicipalProgramStyleSelector x:Key="MunicipalProgramStyleSelector"
+									NotCalculation="{StaticResource NotCalculationStyleKey}"
+									Verified="{StaticResource VerifiedStyleKey}"
+									Presented="{StaticResource PresentedStyleKey}"/>
+</ResourceDictionary>

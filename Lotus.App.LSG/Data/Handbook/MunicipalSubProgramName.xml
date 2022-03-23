@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Repository Identifier="MunicipalSubProgramName" Name="Наименование муниципальных подпрограмм" Count="3" ID="1">
+
+  <Scheme>
+    <Column Name="ID" DataTypeCode="Int32" Caption="Код"/>
+    <Column Name="ParentID" DataTypeCode="Int32" IsHide="true"/>
+    <Column Name="ShortName" DataTypeCode="String" Caption="Краткое наименование" IsMainColumn="True"/>
+    <Column Name="FullName" DataTypeCode="String" Caption="Полное наименование"/>
+  </Scheme>
+  
+  <Record ID="0" ParentID="0" Identifier="RoadRepairs" ShortName="Ремонт" FullName="Развитие и совершенствование сети автомобильных дорог общего пользования в Брединском муниципальном районе"/>
+  <Record ID="1" ParentID="0" Identifier="RoadSecurity" ShortName="Безопасность" FullName="Безопасность дорожного движения в Брединском муниципальном районе"/>
+  
+  <Record ID="2" ParentID="1" ShortName="Модернизация" FullName="Модернизация объектов коммунальной инфраструктуры"/>
+  <Record ID="3" ParentID="1" ShortName="Молодая семья" FullName="Оказание молодым семьям государственной поддержки для улучшения жилищных условий"/>
+  <Record ID="4" ParentID="1" ShortName="Переселение" FullName="Мероприятия по переселению граждан из жилищного фонда, признанного непригодным для проживания"  />
+</Repository>

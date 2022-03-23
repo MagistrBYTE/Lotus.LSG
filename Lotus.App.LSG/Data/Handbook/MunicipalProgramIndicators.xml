@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <Repository Identifier="MunicipalProgramIndicators" Name="Целевые индикаторы" ID="2">
+    <Scheme>
+      <Column Name="ID" DataTypeCode="Int32" Caption="Код"/>
+      <Column Name="ParentID" DataTypeCode="Int32" IsHide="true"/>
+      <Column Name="ShortName" DataTypeCode="String" Caption="Краткое наименование" IsMainColumn="True"/>
+      <Column Name="FullName" DataTypeCode="String" Caption="Полное наименование"/>
+    </Scheme>
+    
+    <Record ID="0" ParentID="0" Identifier="RoadRepairsLength" ShortName="Прирост протяженности" 
+            FullName="Прирост протяженности автомобильных дорог общего пользования местного значения на, соответствующих нормативным требованиям к транспортно-эксплуатационным показателям, в результате капитального ремонта и ремонта автомобильных дорог"/>
+    <Record ID="1" ParentID="0" Identifier="RoadRepairsDefect" ShortName="Ликвидация дефектов" 
+            FullName="Ликвидация дефектов дорожного покрытия в рамках осуществления работ по ремонту и содержанию автомобильных дорог и (или) улично-дорожной сети"/>
+    <Record ID="2" ParentID="0" Identifier="RoadRepairsMaintenance" ShortName="Комплексное содержание" 
+            FullName="Комплексное содержание автомобильных дорог и улично-дорожной сети"/>
+
+    <Record ID="3" ParentID="1" Identifier="RoadSecuritySign" ShortName="Установка знаков" FullName="Установка дорожных знаков"/>
+    <Record ID="4" ParentID="1" Identifier="RoadSecurityComplex" ShortName="Обустройство переходов" FullName="Комплексное обустройство пешеходных переходов"/>
+    <Record ID="5" ParentID="1" Identifier="RoadSecurityFence" ShortName="Установка ограждений" FullName="Установка дорожных ограждений"/>
+    <Record ID="6" ParentID="1" Identifier="RoadSecuritySidewalks" ShortName="Устройство тротуаров" FullName="Устройство тротуаров"/>
+    <Record ID="7" ParentID="1" Identifier="RoadSecurityBump" ShortName="Устройство неровностей" FullName="Устройство искусственных неровностей"/>
+  
+  </Repository>

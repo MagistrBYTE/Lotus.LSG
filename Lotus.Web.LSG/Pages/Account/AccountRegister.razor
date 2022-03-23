@@ -1,0 +1,77 @@
+﻿@page "/Account/Register"
+
+@using Lotus.Web;
+@using Lotus.Web.Account;
+
+@layout LoginLayout
+@inject NavigationManager navigationManager
+@inject CIdentityAuthenticationStateProvider authStateProvider
+
+<div class="container">
+    <EditForm class="form-signin" OnValidSubmit="OnSubmit" Model="RegisterParameters">
+        <DataAnnotationsValidator />
+        <h4 class="font-weight-normal text-center m-2">Регистрация нового пользователя</h4>
+
+        <label for="inputEmail" class="sr-only m-2">Email</label>
+        <InputText id="inputEmail" class="form-control m-2" placeholder="Email" autofocus @bind-Value="@RegisterParameters.Email" />
+        <ValidationMessage For="@(() => RegisterParameters.Email)" />
+
+        <label for="inputUsername" class="sr-only m-2">Имя пользователя</label>
+        <InputText id="inputUsername" class="form-control m-2" placeholder="Логин" autofocus @bind-Value="@RegisterParameters.UserName" />
+        <ValidationMessage For="@(() => RegisterParameters.UserName)" />
+
+        <label for="inputPassword" class="sr-only m-2">Пароль</label>
+        <InputText type="password" id="inputPassword" class="form-control m-2" placeholder="Пароль" @bind-Value="@RegisterParameters.Password" />
+        <ValidationMessage For="@(() => RegisterParameters.Password)" />
+
+        <label for="inputPasswordConfirm" class="sr-only m-2">Повторите пароль</label>
+        <InputText type="password" id="inputPasswordConfirm" class="form-control m-2" placeholder="Повторите пароль" @bind-Value="@RegisterParameters.PasswordConfirm" />
+        <ValidationMessage For="@(() => RegisterParameters.PasswordConfirm)" />
+
+        <Span>Личная информация</Span>
+
+        <label for="inputName" class="sr-only m-2">Имя</label>
+        <InputText id="inputName" class="form-control m-2" placeholder="Имя" @bind-Value="@RegisterParameters.Name" />
+        
+        <label for="inputSurname" class="sr-only m-2">Фамилия</label>
+        <InputText id="inputSurname" class="form-control m-2" placeholder="Фамилия" @bind-Value="@RegisterParameters.Surname" />
+
+        <label for="inputPatronymic" class="sr-only m-2">Отчество</label>
+        <InputText id="inputPatronymic" class="form-control m-2" placeholder="Фамилия" @bind-Value="@RegisterParameters.Patronymic" />
+
+        <button class="btn btn-lg btn-primary btn-block m-2" type="submit">Создать аккаунт</button>
+
+        <label class="text-danger m-2">@ErrorMessage</label>
+        <NavLink href="login">
+            <h6 class="font-weight-normal text-center m-2">Уже зарегистрированы, нажмите сюда для входа</h6>
+        </NavLink>
+    </EditForm>
+</div>
+
+@code
+{
+
+    /// <summary>
+    /// Параметры регистрации
+    /// </summary>
+    CRegisterParameters RegisterParameters { get; set; } = new CRegisterParameters();
+
+    /// <summary>
+    /// Строка с ошибкой
+    /// </summary>
+    String ErrorMessage { get; set; }
+
+    async Task OnSubmit()
+    {
+        ErrorMessage = null;
+        try
+        {
+            await authStateProvider.Register(RegisterParameters);
+            navigationManager.NavigateTo("");
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+    }
+}
